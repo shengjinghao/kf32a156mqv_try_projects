@@ -1,0 +1,2995 @@
+
+Demo1_light.elf:     file format elf32-kungfu32-little
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+__vector_entry__:
+   0:	00 00 01 10 38 06 00 00 b0 06 00 00 b4 06 00 00     ....8...........
+  10:	24 0b 00 00 b8 06 00 00 bc 06 00 00 cc d3 fe ef     $...............
+  20:	24 0b 00 00 24 0b 00 00 24 0b 00 00 c0 06 00 00     $...$...$.......
+  30:	24 0b 00 00 24 0b 00 00 c4 06 00 00 c8 06 00 00     $...$...........
+  40:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  50:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  60:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  70:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  80:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  90:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  a0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  b0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  c0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  d0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  e0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+  f0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 100:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 110:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 120:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 130:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 140:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 150:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 160:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 170:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 180:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 190:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 1a0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 1b0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 1c0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 1d0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 1e0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+ 1f0:	24 0b 00 00 24 0b 00 00 24 0b 00 00 24 0b 00 00     $...$...$...$...
+
+00000200 <GPIO_Configuration>:
+GPIO_Configuration():
+..\src\kf32a1x6_gpio.c:116
+  * 输入  GPIOx: 指向GPIO内存结构的指针，取值为GPIOA_SFR~GPIOH_SFR。
+  *       gpioInitStruct: GPIO配置信息结构体指针。
+  * 返回  无。
+  **/
+void GPIO_Configuration (GPIO_SFRmap* GPIOx, GPIO_InitTypeDef* gpioInitStruct)
+{
+ 200:	1f 5f       	PUSH      {R6-R10}
+ 202:	61 82       	LD.W      R6, [R1]
+..\src\kf32a1x6_gpio.c:131
+    CHECK_RESTRICTION(CHECK_GPIO_SPEED(gpioInitStruct->m_Speed));
+    CHECK_RESTRICTION(CHECK_GPIO_PU(gpioInitStruct->m_PullUp));
+    CHECK_RESTRICTION(CHECK_GPIO_PD(gpioInitStruct->m_PullDown));
+
+    /* 配置一个引脚信息 */
+    for (pinpos = 0x00; pinpos < 0x10; pinpos++)
+ 204:	50 10       	MOV       R5, #0
+..\src\kf32a1x6_gpio.c:133
+    {
+        pos = ((uint32_t)0x01) << pinpos;
+ 206:	21 10       	MOV       R2, #1
+..\src\kf32a1x6_gpio.c:143
+        {
+            /*----------- 设置GPIOx_PMOD寄存器 -----------*/
+            /* 根据结构体成员m_Mode，设置PXPMDy位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_Mode) << (pinpos * 2));
+            GPIOx->PMOD = SFR_Config (GPIOx->PMOD,
+                                  ~(GPIO_PMOD_PXPMD0 << (pinpos * 2)),
+ 208:	a3 10       	MOV       R10, #3
+ 20a:	04 04       	SJMP      $+4                   ;->0x212
+..\src\kf32a1x6_gpio.c:131
+    CHECK_RESTRICTION(CHECK_GPIO_SPEED(gpioInitStruct->m_Speed));
+    CHECK_RESTRICTION(CHECK_GPIO_PU(gpioInitStruct->m_PullUp));
+    CHECK_RESTRICTION(CHECK_GPIO_PD(gpioInitStruct->m_PullDown));
+
+    /* 配置一个引脚信息 */
+    for (pinpos = 0x00; pinpos < 0x10; pinpos++)
+ 20c:	6d c0       	ADD       R5, R5, #1
+ 20e:	50 39       	CMP       R5, #16
+ 210:	31 f0       	JZ        $+49                  ;->0x272
+..\src\kf32a1x6_gpio.c:133
+    {
+        pos = ((uint32_t)0x01) << pinpos;
+ 212:	62 db       	LSL       R4, R2, R5
+..\src\kf32a1x6_gpio.c:135
+        /* 获取引脚位置信息 */
+        currentpin = (gpioInitStruct->m_Pin) & pos;
+ 214:	9c d5       	ANL       R3, R4, R6
+..\src\kf32a1x6_gpio.c:137
+
+        if (currentpin == pos)
+ 216:	34 70       	CMP       R3, R4
+ 218:	fa f1       	JNZ       $-6                   ;->0x20c
+..\src\kf32a1x6_gpio.c:115
+  * 描述  通用输入输出端口(GPIO)初始化配置。
+  * 输入  GPIOx: 指向GPIO内存结构的指针，取值为GPIOA_SFR~GPIOH_SFR。
+  *       gpioInitStruct: GPIO配置信息结构体指针。
+  * 返回  无。
+  **/
+void GPIO_Configuration (GPIO_SFRmap* GPIOx, GPIO_InitTypeDef* gpioInitStruct)
+ 21a:	65 c3       	ADD       R4, R5, R5
+..\src\kf32a1x6_gpio.c:142
+        if (currentpin == pos)
+        {
+            /*----------- 设置GPIOx_PMOD寄存器 -----------*/
+            /* 根据结构体成员m_Mode，设置PXPMDy位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_Mode) << (pinpos * 2));
+            GPIOx->PMOD = SFR_Config (GPIOx->PMOD,
+ 21c:	78 99       	LD.W      R7, [R0 + #5]
+ 21e:	27 59       	MOV       R9, R7
+..\src\kf32a1x6_gpio.c:143
+                                  ~(GPIO_PMOD_PXPMD0 << (pinpos * 2)),
+ 220:	ea 58       	MOV       R7, R10
+ 222:	3f db       	LSL       R7, R7, R4
+..\src\kf32a1x6_gpio.c:142
+        if (currentpin == pos)
+        {
+            /*----------- 设置GPIOx_PMOD寄存器 -----------*/
+            /* 根据结构体成员m_Mode，设置PXPMDy位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_Mode) << (pinpos * 2));
+            GPIOx->PMOD = SFR_Config (GPIOx->PMOD,
+ 224:	87 68       	NOT       R8, R7
+KF32A156.h:14083
+   ---------------------------------------------------------------------------- */
+/* 写特殊功能寄存器 */
+static inline uint32_t
+SFR_Config (uint32_t SfrMem, uint32_t SfrMask, uint32_t WriteVal)
+{
+    return ((SfrMem & SfrMask) | (WriteVal));
+ 226:	89 69       	ANL       R8, R9
+..\src\kf32a1x6_gpio.c:141
+
+        if (currentpin == pos)
+        {
+            /*----------- 设置GPIOx_PMOD寄存器 -----------*/
+            /* 根据结构体成员m_Mode，设置PXPMDy位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_Mode) << (pinpos * 2));
+ 228:	79 98       	LD.W      R7, [R1 + #1]
+ 22a:	3f db       	LSL       R7, R7, R4
+KF32A156.h:14083
+ 22c:	87 6a       	ORL       R8, R7
+..\src\kf32a1x6_gpio.c:142
+            GPIOx->PMOD = SFR_Config (GPIOx->PMOD,
+ 22e:	e8 58       	MOV       R7, R8
+ 230:	47 a1       	ST.W      [R0 + #5], R7
+..\src\kf32a1x6_gpio.c:147
+                                  ~(GPIO_PMOD_PXPMD0 << (pinpos * 2)),
+                                  tmpreg);
+
+            if ((gpioInitStruct->m_Mode == GPIO_MODE_OUT)
+                || (gpioInitStruct->m_Mode == GPIO_MODE_RMP))
+ 232:	79 98       	LD.W      R7, [R1 + #1]
+ 234:	7f cc       	SUB       R7, R7, #1
+..\src\kf32a1x6_gpio.c:146
+            tmpreg = (((uint32_t)gpioInitStruct->m_Mode) << (pinpos * 2));
+            GPIOx->PMOD = SFR_Config (GPIOx->PMOD,
+                                  ~(GPIO_PMOD_PXPMD0 << (pinpos * 2)),
+                                  tmpreg);
+
+            if ((gpioInitStruct->m_Mode == GPIO_MODE_OUT)
+ 236:	71 38       	CMP       R7, #1
+ 238:	1f f9       	JLS       $+31                  ;->0x276
+ 23a:	33 68       	NOT       R3, R3
+..\src\kf32a1x6_gpio.c:167
+            }
+
+            /*----------- 设置GPIOx_OMOD寄存器 -----------*/
+            /* 根据结构体成员m_Speed，设置PXOMD位域 */
+            tmpreg = ((uint32_t)gpioInitStruct->m_Speed) << (pinpos * 2);
+            GPIOx->OMOD = SFR_Config (GPIOx->OMOD,
+ 23c:	b8 99       	LD.W      R7, [R0 + #6]
+ 23e:	27 59       	MOV       R9, R7
+..\src\kf32a1x6_gpio.c:168
+                                  ~(GPIO_OMOD_PXOMD0 << (pinpos * 2)),
+ 240:	3a db       	LSL       R7, R2, R4
+..\src\kf32a1x6_gpio.c:167
+            }
+
+            /*----------- 设置GPIOx_OMOD寄存器 -----------*/
+            /* 根据结构体成员m_Speed，设置PXOMD位域 */
+            tmpreg = ((uint32_t)gpioInitStruct->m_Speed) << (pinpos * 2);
+            GPIOx->OMOD = SFR_Config (GPIOx->OMOD,
+ 242:	87 68       	NOT       R8, R7
+KF32A156.h:14083
+ 244:	89 69       	ANL       R8, R9
+..\src\kf32a1x6_gpio.c:166
+                ;
+            }
+
+            /*----------- 设置GPIOx_OMOD寄存器 -----------*/
+            /* 根据结构体成员m_Speed，设置PXOMD位域 */
+            tmpreg = ((uint32_t)gpioInitStruct->m_Speed) << (pinpos * 2);
+ 246:	b9 98       	LD.W      R7, [R1 + #2]
+ 248:	27 db       	LSL       R4, R7, R4
+KF32A156.h:14083
+ 24a:	e8 58       	MOV       R7, R8
+ 24c:	27 d7       	ORL       R4, R7, R4
+..\src\kf32a1x6_gpio.c:167
+            GPIOx->OMOD = SFR_Config (GPIOx->OMOD,
+ 24e:	84 a1       	ST.W      [R0 + #6], R4
+..\src\kf32a1x6_gpio.c:174
+                                  tmpreg);
+
+            /*----------- 设置GPIOx_PUR寄存器 -----------*/
+            /* 根据结构体成员m_PullUp，设置PXPUR位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_PullUp) << (pinpos));
+            GPIOx->PUR = SFR_Config (GPIOx->PUR,
+ 250:	a0 98       	LD.W      R4, [R0 + #2]
+KF32A156.h:14083
+ 252:	23 d5       	ANL       R4, R3, R4
+ 254:	04 59       	MOV       R8, R4
+..\src\kf32a1x6_gpio.c:173
+                                  ~(GPIO_OMOD_PXOMD0 << (pinpos * 2)),
+                                  tmpreg);
+
+            /*----------- 设置GPIOx_PUR寄存器 -----------*/
+            /* 根据结构体成员m_PullUp，设置PXPUR位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_PullUp) << (pinpos));
+ 256:	39 99       	LD.W      R7, [R1 + #4]
+ 258:	67 db       	LSL       R4, R7, R5
+KF32A156.h:14083
+ 25a:	e8 58       	MOV       R7, R8
+ 25c:	27 d7       	ORL       R4, R7, R4
+..\src\kf32a1x6_gpio.c:174
+            GPIOx->PUR = SFR_Config (GPIOx->PUR,
+ 25e:	84 a0       	ST.W      [R0 + #2], R4
+..\src\kf32a1x6_gpio.c:181
+                                  tmpreg);
+
+            /*----------- 设置GPIOx_PDR寄存器 -----------*/
+            /* 根据结构体成员m_PullDown，设置PXPDR位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_PullDown) << (pinpos));
+            GPIOx->PDR = SFR_Config (GPIOx->PDR,
+ 260:	e0 98       	LD.W      R4, [R0 + #3]
+KF32A156.h:14083
+ 262:	1b d5       	ANL       R3, R3, R4
+..\src\kf32a1x6_gpio.c:180
+                                  ~(GPIO_PUR_PXPUR0 << pinpos),
+                                  tmpreg);
+
+            /*----------- 设置GPIOx_PDR寄存器 -----------*/
+            /* 根据结构体成员m_PullDown，设置PXPDR位域 */
+            tmpreg = (((uint32_t)gpioInitStruct->m_PullDown) << (pinpos));
+ 264:	79 99       	LD.W      R7, [R1 + #5]
+ 266:	67 db       	LSL       R4, R7, R5
+KF32A156.h:14083
+ 268:	1b d7       	ORL       R3, R3, R4
+..\src\kf32a1x6_gpio.c:181
+            GPIOx->PDR = SFR_Config (GPIOx->PDR,
+ 26a:	c3 a0       	ST.W      [R0 + #3], R3
+..\src\kf32a1x6_gpio.c:131
+    CHECK_RESTRICTION(CHECK_GPIO_SPEED(gpioInitStruct->m_Speed));
+    CHECK_RESTRICTION(CHECK_GPIO_PU(gpioInitStruct->m_PullUp));
+    CHECK_RESTRICTION(CHECK_GPIO_PD(gpioInitStruct->m_PullDown));
+
+    /* 配置一个引脚信息 */
+    for (pinpos = 0x00; pinpos < 0x10; pinpos++)
+ 26c:	6d c0       	ADD       R5, R5, #1
+ 26e:	50 39       	CMP       R5, #16
+ 270:	d1 f1       	JNZ       $-47                  ;->0x212
+..\src\kf32a1x6_gpio.c:190
+        else
+        {
+            ;
+        }
+    }
+}
+ 272:	1f 5e       	POP       {R6-R10}
+ 274:	1d 5c       	JMP       LR
+..\src\kf32a1x6_gpio.c:155
+                CHECK_RESTRICTION(CHECK_GPIO_POD(gpioInitStruct->m_OpenDrain));
+
+                /*----------- 设置GPIOx_PODR寄存器 -----------*/
+                /* 根据结构体成员m_OpenDrain，设置PXPODR位域 */
+                tmpreg = (((uint32_t)gpioInitStruct->m_OpenDrain) << (pinpos));
+                GPIOx->PODR = SFR_Config (GPIOx->PODR,
+ 276:	38 99       	LD.W      R7, [R0 + #4]
+ 278:	07 59       	MOV       R8, R7
+ 27a:	33 68       	NOT       R3, R3
+KF32A156.h:14083
+ 27c:	e3 58       	MOV       R7, R3
+ 27e:	78 69       	ANL       R7, R8
+ 280:	07 59       	MOV       R8, R7
+..\src\kf32a1x6_gpio.c:154
+                /* GPIO开漏控制参数校验 */
+                CHECK_RESTRICTION(CHECK_GPIO_POD(gpioInitStruct->m_OpenDrain));
+
+                /*----------- 设置GPIOx_PODR寄存器 -----------*/
+                /* 根据结构体成员m_OpenDrain，设置PXPODR位域 */
+                tmpreg = (((uint32_t)gpioInitStruct->m_OpenDrain) << (pinpos));
+ 282:	f9 98       	LD.W      R7, [R1 + #3]
+ 284:	7f db       	LSL       R7, R7, R5
+KF32A156.h:14083
+ 286:	87 6a       	ORL       R8, R7
+..\src\kf32a1x6_gpio.c:155
+                GPIOx->PODR = SFR_Config (GPIOx->PODR,
+ 288:	e8 58       	MOV       R7, R8
+ 28a:	07 a1       	ST.W      [R0 + #4], R7
+ 28c:	d8 07       	SJMP      $-40                  ;->0x23c
+
+0000028e <GPIO_Write_Mode_Bits>:
+GPIO_Write_Mode_Bits():
+..\src\kf32a1x6_gpio.c:404
+  *                   GPIO_MODE_RMP: 重映射IO口功能模式
+  *                   GPIO_MODE_AN: 模拟模式
+  * 返回  无。
+  */
+void GPIO_Write_Mode_Bits (GPIO_SFRmap* GPIOx,uint16_t GpioPin, GPIOMode_TypeDef NewState)
+{
+ 28e:	03 5f       	PUSH      {R6-R7}
+ 290:	11 d0       	ZXT.H     R1, R1
+..\src\kf32a1x6_gpio.c:414
+	CHECK_RESTRICTION(CHECK_GPIO_ALL_PERIPH(GPIOx));
+	CHECK_RESTRICTION(CHECK_GPIO_PIN_MASK(GpioPin));
+	CHECK_RESTRICTION(CHECK_GPIO_MODE(NewState));
+
+	/*----------- 获取GPIOx_PMOD寄存器 -----------*/
+	tmpreg = GPIOx->PMOD;
+ 292:	58 99       	LD.W      R3, [R0 + #5]
+..\src\kf32a1x6_gpio.c:415
+	while(GpioPin)
+ 294:	10 38       	CMP       R1, #0
+ 296:	0f f0       	JZ        $+15                  ;->0x2b4
+ 298:	50 10       	MOV       R5, #0
+..\src\kf32a1x6_gpio.c:417
+	{
+		if(GpioPin & (uint16_t)0x01)
+ 29a:	61 10       	MOV       R6, #1
+..\src\kf32a1x6_gpio.c:420
+		{
+            /* 记录配置信息 */
+            tmpreg &= ~(GPIO_PMOD_PXPMD0 << pinpos);
+ 29c:	73 10       	MOV       R7, #3
+..\src\kf32a1x6_gpio.c:417
+
+	/*----------- 获取GPIOx_PMOD寄存器 -----------*/
+	tmpreg = GPIOx->PMOD;
+	while(GpioPin)
+	{
+		if(GpioPin & (uint16_t)0x01)
+ 29e:	a1 d5       	ANL       R4, R1, R6
+ 2a0:	06 f0       	JZ        $+6                   ;->0x2ac
+..\src\kf32a1x6_gpio.c:420
+		{
+            /* 记录配置信息 */
+            tmpreg &= ~(GPIO_PMOD_PXPMD0 << pinpos);
+ 2a2:	67 db       	LSL       R4, R7, R5
+ 2a4:	44 68       	NOT       R4, R4
+ 2a6:	dc d4       	ANL       R3, R4, R3
+..\src\kf32a1x6_gpio.c:421
+            tmpreg |= (uint32_t)NewState << pinpos;
+ 2a8:	62 db       	LSL       R4, R2, R5
+ 2aa:	1b d7       	ORL       R3, R3, R4
+..\src\kf32a1x6_gpio.c:427
+		}
+		else
+		{
+			;
+		}
+		GpioPin >>= 1;
+ 2ac:	09 7c       	LSR       R1, #1
+..\src\kf32a1x6_gpio.c:428
+		pinpos += 2;
+ 2ae:	ad c0       	ADD       R5, R5, #2
+..\src\kf32a1x6_gpio.c:415
+	CHECK_RESTRICTION(CHECK_GPIO_PIN_MASK(GpioPin));
+	CHECK_RESTRICTION(CHECK_GPIO_MODE(NewState));
+
+	/*----------- 获取GPIOx_PMOD寄存器 -----------*/
+	tmpreg = GPIOx->PMOD;
+	while(GpioPin)
+ 2b0:	10 38       	CMP       R1, #0
+ 2b2:	f6 f1       	JNZ       $-10                  ;->0x29e
+..\src\kf32a1x6_gpio.c:432
+		GpioPin >>= 1;
+		pinpos += 2;
+	}
+
+    /*----------- 配置GPIOx_PMOD寄存器 -----------*/
+    GPIOx->PMOD = tmpreg;
+ 2b4:	43 a1       	ST.W      [R0 + #5], R3
+..\src\kf32a1x6_gpio.c:433
+}
+ 2b6:	03 5e       	POP       {R6-R7}
+ 2b8:	1d 5c       	JMP       LR
+
+000002ba <GPIO_Set_Output_Data_Bits>:
+GPIO_Set_Output_Data_Bits():
+..\src\kf32a1x6_gpio.c:625
+  *                    Bit_RESET: 逻辑低电平
+  *                    Bit_SET: 逻辑高电平
+  * 返回  无。
+  */
+void GPIO_Set_Output_Data_Bits (GPIO_SFRmap* GPIOx,uint16_t GpioPin, BitAction BitsValue)
+{
+ 2ba:	11 d0       	ZXT.H     R1, R1
+..\src\kf32a1x6_gpio.c:635
+
+    /*----------- 设置GPIOx_POR寄存器 -----------*/
+    if (BitsValue != Bit_RESET)
+    {
+        /* 逻辑高电平 */
+        GPIOx->POR |= (uint32_t)GpioPin;
+ 2bc:	68 98       	LD.W      R5, [R0 + #1]
+..\src\kf32a1x6_gpio.c:632
+    CHECK_RESTRICTION(CHECK_GPIO_ALL_PERIPH(GPIOx));
+    CHECK_RESTRICTION(CHECK_GPIO_PIN_MASK(GpioPin));
+    CHECK_RESTRICTION(CHECK_GPIO_BIT_ACTION(BitsValue));
+
+    /*----------- 设置GPIOx_POR寄存器 -----------*/
+    if (BitsValue != Bit_RESET)
+ 2be:	20 38       	CMP       R2, #0
+ 2c0:	05 f1       	JNZ       $+5                   ;->0x2ca
+..\src\kf32a1x6_gpio.c:640
+        GPIOx->POR |= (uint32_t)GpioPin;
+    }
+    else
+    {
+        /* 逻辑低电平 */
+        GPIOx->POR &= ~((uint32_t)GpioPin);
+ 2c2:	11 68       	NOT       R1, R1
+ 2c4:	49 d5       	ANL       R1, R1, R5
+ 2c6:	41 a0       	ST.W      [R0 + #1], R1
+..\src\kf32a1x6_gpio.c:642
+    }
+}
+ 2c8:	1d 5c       	JMP       LR
+..\src\kf32a1x6_gpio.c:635
+
+    /*----------- 设置GPIOx_POR寄存器 -----------*/
+    if (BitsValue != Bit_RESET)
+    {
+        /* 逻辑高电平 */
+        GPIOx->POR |= (uint32_t)GpioPin;
+ 2ca:	49 d7       	ORL       R1, R1, R5
+ 2cc:	41 a0       	ST.W      [R0 + #1], R1
+..\src\kf32a1x6_gpio.c:642
+    else
+    {
+        /* 逻辑低电平 */
+        GPIOx->POR &= ~((uint32_t)GpioPin);
+    }
+}
+ 2ce:	1d 5c       	JMP       LR
+
+000002d0 <GPIO_Toggle_Output_Data_Config>:
+GPIO_Toggle_Output_Data_Config():
+..\src\kf32a1x6_gpio.c:652
+  *       GpioPin: 端口引脚掩码，取值为GPIO_PIN_MASK_0~GPIO_PIN_MASK_15中的
+  *                一个或多个组合。
+  * 返回  无。
+  */
+void GPIO_Toggle_Output_Data_Config (GPIO_SFRmap* GPIOx, uint16_t GpioPin)
+{
+ 2d0:	11 d0       	ZXT.H     R1, R1
+..\src\kf32a1x6_gpio.c:657
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_GPIO_ALL_PERIPH(GPIOx));
+
+    /*----------- 设置GPIOx_POR寄存器 -----------*/
+    GPIOx->POR ^= (uint32_t)GpioPin;
+ 2d2:	68 98       	LD.W      R5, [R0 + #1]
+ 2d4:	49 d9       	XRL       R1, R1, R5
+ 2d6:	41 a0       	ST.W      [R0 + #1], R1
+..\src\kf32a1x6_gpio.c:658
+}
+ 2d8:	1d 5c       	JMP       LR
+	...
+
+000002dc <INT_Priority_Group_Config>:
+INT_Priority_Group_Config():
+..\src\kf32a1x6_int.c:208
+	/* 参数校验 */
+    CHECK_RESTRICTION(CHECK_INT_PRIORITY_GROUP(PriorityGroup));
+
+    /*------------------ 设置INT_CTL0寄存器 -----------------*/
+    /* 根据参数PriorityGroup，设置PRIGROUP位域 */
+    INT_CTL0 = SFR_Config (INT_CTL0, ~INT_CTL0_PRIGROUP, PriorityGroup);
+ 2dc:	04 45       	LD        R5, [PC + #4]         ;->0x2ec  :=0x40200000
+ 2de:	45 82       	LD.W      R4, [R5]
+KF32A156.h:14083
+ 2e0:	21 4a       	CLR       R4, #1
+ 2e2:	22 4a       	CLR       R4, #2
+ 2e4:	00 d7       	ORL       R0, R0, R4
+..\src\kf32a1x6_int.c:208
+ 2e6:	50 85       	ST.W      [R5], R0
+..\src\kf32a1x6_int.c:209
+}
+ 2e8:	1d 5c       	JMP       LR
+ 2ea:	00 00       	NOP      NOP      
+ 2ec:	00 00 20 40 	.long     0x40200000 ->1075838976  [!!!@2@:NOP      	@@: LD        R0, [PC + #32]        ;->0x36c  :=0xf91d3852
+
+000002f0 <INT_All_Enable>:
+INT_All_Enable():
+..\src\kf32a1x6_int.c:241
+
+    /*---------------- 设置INT_CTL0寄存器AIE位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 全局可屏蔽中断使能 */
+        SFR_SET_BIT_ASM(INT_CTL0, INT_CTL0_AIE_POS);
+ 2f0:	03 45       	LD        R5, [PC + #3]         ;->0x2fc  :=0x40200000
+..\src\kf32a1x6_int.c:238
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置INT_CTL0寄存器AIE位 ----------------*/
+    if (NewState != FALSE)
+ 2f2:	00 38       	CMP       R0, #0
+ 2f4:	06 f1       	JNZ       $+6                   ;->0x300
+..\src\kf32a1x6_int.c:246
+        SFR_SET_BIT_ASM(INT_CTL0, INT_CTL0_AIE_POS);
+    }
+    else
+    {
+        /* 全局可屏蔽中断禁止 */
+        SFR_CLR_BIT_ASM(INT_CTL0, INT_CTL0_AIE_POS);
+ 2f6:	28 4e       	CLR       [R5], #0
+..\src\kf32a1x6_int.c:248
+    }
+}
+ 2f8:	1d 5c       	JMP       LR
+ 2fa:	00 00       	NOP      NOP      
+ 2fc:	00 00 20 40 	.long     0x40200000 ->1075838976  [!!!@2@:NOP      	@@: LD        R0, [PC + #32]        ;->0x37c  :=0xc1247a23
+..\src\kf32a1x6_int.c:241
+
+    /*---------------- 设置INT_CTL0寄存器AIE位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 全局可屏蔽中断使能 */
+        SFR_SET_BIT_ASM(INT_CTL0, INT_CTL0_AIE_POS);
+ 300:	28 4c       	SET       [R5], #0
+..\src\kf32a1x6_int.c:248
+    else
+    {
+        /* 全局可屏蔽中断禁止 */
+        SFR_CLR_BIT_ASM(INT_CTL0, INT_CTL0_AIE_POS);
+    }
+}
+ 302:	1d 5c       	JMP       LR
+
+00000304 <INT_Interrupt_Enable>:
+INT_Interrupt_Enable():
+..\src\kf32a1x6_int.c:268
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PERIPHERAL_INTERRUPT_INDEX(Peripheral));
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    if(Peripheral <= INT_SysTick)
+ 304:	0f 38       	CMP       R0, #15
+ 306:	21 f9       	JLS       $+33                  ;->0x348
+..\src\kf32a1x6_int.c:275
+    	/*---------------- 设置INT_EIE0寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << Peripheral);
+    	tmpreg = ((uint32_t)NewState << Peripheral);
+    	INT_EIE0 = SFR_Config(INT_EIE0, ~tmask, tmpreg);
+    }
+    else if(Peripheral <= INT_SPI1)
+ 308:	0f 3a       	CMP       R0, #47
+ 30a:	11 f9       	JLS       $+17                  ;->0x32c
+..\src\kf32a1x6_int.c:282
+    	/*---------------- 设置INT_EIE1寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << (Peripheral - INT_WWDT));
+    	tmpreg = ((uint32_t)NewState << (Peripheral - INT_WWDT));
+    	INT_EIE1 = SFR_Config(INT_EIE1, ~tmask, tmpreg);
+    }
+    else if(Peripheral <= INT_USART7)
+ 30c:	0f 3c       	CMP       R0, #79
+ 30e:	0b f8       	JHI       $+11                  ;->0x324
+..\src\kf32a1x6_int.c:285
+    {
+    	/*---------------- 设置INT_EIE2寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << (Peripheral - INT_DMA1));
+ 310:	00 33       	SUB       R0, #48
+..\src\kf32a1x6_int.c:287
+    	tmpreg = ((uint32_t)NewState << (Peripheral - INT_DMA1));
+    	INT_EIE2 = SFR_Config(INT_EIE2, ~tmask, tmpreg);
+ 312:	06 45       	LD        R5, [PC + #6]         ;->0x328  :=0x40200000
+ 314:	5d 99       	LD.W      R3, [R5 + #5]
+..\src\kf32a1x6_int.c:285
+    	INT_EIE1 = SFR_Config(INT_EIE1, ~tmask, tmpreg);
+    }
+    else if(Peripheral <= INT_USART7)
+    {
+    	/*---------------- 设置INT_EIE2寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << (Peripheral - INT_DMA1));
+ 316:	41 10       	MOV       R4, #1
+ 318:	24 da       	LSL       R4, R4, R0
+..\src\kf32a1x6_int.c:287
+    	tmpreg = ((uint32_t)NewState << (Peripheral - INT_DMA1));
+    	INT_EIE2 = SFR_Config(INT_EIE2, ~tmask, tmpreg);
+ 31a:	44 68       	NOT       R4, R4
+KF32A156.h:14083
+ 31c:	e4 d4       	ANL       R4, R4, R3
+..\src\kf32a1x6_int.c:286
+    }
+    else if(Peripheral <= INT_USART7)
+    {
+    	/*---------------- 设置INT_EIE2寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << (Peripheral - INT_DMA1));
+    	tmpreg = ((uint32_t)NewState << (Peripheral - INT_DMA1));
+ 31e:	01 da       	LSL       R0, R1, R0
+KF32A156.h:14083
+ 320:	04 d6       	ORL       R0, R4, R0
+..\src\kf32a1x6_int.c:287
+    	INT_EIE2 = SFR_Config(INT_EIE2, ~tmask, tmpreg);
+ 322:	68 a1       	ST.W      [R5 + #5], R0
+..\src\kf32a1x6_int.c:293
+    }
+    else
+    {
+    	;
+    }
+}
+ 324:	1d 5c       	JMP       LR
+ 326:	00 00       	NOP      NOP      
+ 328:	00 00 20 40 	.long     0x40200000 ->1075838976  [!!!@2@:NOP      	@@: LD        R0, [PC + #32]        ;->0x3a8  :=0xf1e73850
+..\src\kf32a1x6_int.c:278
+    	INT_EIE0 = SFR_Config(INT_EIE0, ~tmask, tmpreg);
+    }
+    else if(Peripheral <= INT_SPI1)
+    {
+    	/*---------------- 设置INT_EIE1寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << (Peripheral - INT_WWDT));
+ 32c:	00 31       	SUB       R0, #16
+..\src\kf32a1x6_int.c:280
+    	tmpreg = ((uint32_t)NewState << (Peripheral - INT_WWDT));
+    	INT_EIE1 = SFR_Config(INT_EIE1, ~tmask, tmpreg);
+ 32e:	06 45       	LD        R5, [PC + #6]         ;->0x344  :=0x40200000
+ 330:	dd 98       	LD.W      R3, [R5 + #3]
+..\src\kf32a1x6_int.c:278
+    	INT_EIE0 = SFR_Config(INT_EIE0, ~tmask, tmpreg);
+    }
+    else if(Peripheral <= INT_SPI1)
+    {
+    	/*---------------- 设置INT_EIE1寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << (Peripheral - INT_WWDT));
+ 332:	41 10       	MOV       R4, #1
+ 334:	24 da       	LSL       R4, R4, R0
+..\src\kf32a1x6_int.c:280
+    	tmpreg = ((uint32_t)NewState << (Peripheral - INT_WWDT));
+    	INT_EIE1 = SFR_Config(INT_EIE1, ~tmask, tmpreg);
+ 336:	44 68       	NOT       R4, R4
+KF32A156.h:14083
+ 338:	e4 d4       	ANL       R4, R4, R3
+..\src\kf32a1x6_int.c:279
+    }
+    else if(Peripheral <= INT_SPI1)
+    {
+    	/*---------------- 设置INT_EIE1寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << (Peripheral - INT_WWDT));
+    	tmpreg = ((uint32_t)NewState << (Peripheral - INT_WWDT));
+ 33a:	01 da       	LSL       R0, R1, R0
+KF32A156.h:14083
+ 33c:	04 d6       	ORL       R0, R4, R0
+..\src\kf32a1x6_int.c:280
+    	INT_EIE1 = SFR_Config(INT_EIE1, ~tmask, tmpreg);
+ 33e:	e8 a0       	ST.W      [R5 + #3], R0
+..\src\kf32a1x6_int.c:293
+    }
+    else
+    {
+    	;
+    }
+}
+ 340:	1d 5c       	JMP       LR
+ 342:	00 00       	NOP      NOP      
+ 344:	00 00 20 40 	.long     0x40200000 ->1075838976  [!!!@2@:NOP      	@@: LD        R0, [PC + #32]        ;->0x3c4  :=0xc1247a23
+..\src\kf32a1x6_int.c:273
+    if(Peripheral <= INT_SysTick)
+    {
+    	/*---------------- 设置INT_EIE0寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << Peripheral);
+    	tmpreg = ((uint32_t)NewState << Peripheral);
+    	INT_EIE0 = SFR_Config(INT_EIE0, ~tmask, tmpreg);
+ 348:	05 45       	LD        R5, [PC + #5]         ;->0x35c  :=0x40200000
+ 34a:	5d 98       	LD.W      R3, [R5 + #1]
+..\src\kf32a1x6_int.c:271
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    if(Peripheral <= INT_SysTick)
+    {
+    	/*---------------- 设置INT_EIE0寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << Peripheral);
+ 34c:	41 10       	MOV       R4, #1
+ 34e:	24 da       	LSL       R4, R4, R0
+..\src\kf32a1x6_int.c:273
+    	tmpreg = ((uint32_t)NewState << Peripheral);
+    	INT_EIE0 = SFR_Config(INT_EIE0, ~tmask, tmpreg);
+ 350:	44 68       	NOT       R4, R4
+KF32A156.h:14083
+ 352:	e4 d4       	ANL       R4, R4, R3
+..\src\kf32a1x6_int.c:272
+
+    if(Peripheral <= INT_SysTick)
+    {
+    	/*---------------- 设置INT_EIE0寄存器 ----------------*/
+    	tmask = ((uint32_t)1 << Peripheral);
+    	tmpreg = ((uint32_t)NewState << Peripheral);
+ 354:	01 da       	LSL       R0, R1, R0
+KF32A156.h:14083
+ 356:	0c d6       	ORL       R1, R4, R0
+..\src\kf32a1x6_int.c:273
+    	INT_EIE0 = SFR_Config(INT_EIE0, ~tmask, tmpreg);
+ 358:	69 a0       	ST.W      [R5 + #1], R1
+..\src\kf32a1x6_int.c:293
+    }
+    else
+    {
+    	;
+    }
+}
+ 35a:	1d 5c       	JMP       LR
+ 35c:	00 00 20 40 	.long     0x40200000 ->1075838976  [!!!@2@:NOP      	@@: LD        R0, [PC + #32]        ;->0x3dc  :=0xdb1bd65b
+
+00000360 <INT_Interrupt_Priority_Config>:
+INT_Interrupt_Priority_Config():
+..\src\kf32a1x6_int.c:447
+    uint32_t regoffset = 0;
+    uint32_t bitoffset = 0;
+    uint32_t priorityconfig = 0;
+
+    /*--------- 获取INT_CTL0寄存器的PRIGROUP位 ---------*/
+    tmpreg = INT_CTL0;
+ 360:	10 45       	LD        R5, [PC + #16]        ;->0x3a0  :=0x40200000
+ 362:	45 82       	LD.W      R4, [R5]
+..\src\kf32a1x6_int.c:448
+    tmpreg &= INT_CTL0_PRIGROUP;
+ 364:	56 10       	MOV       R5, #6
+ 366:	6c d5       	ANL       R5, R4, R5
+..\src\kf32a1x6_int.c:455
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PERIPHERAL_INTERRUPT_INDEX(Peripheral));
+    CHECK_RESTRICTION(CHECK_PRIORITY_CONFIG(tmpreg, Preemption, SubPriority));
+
+    /*--------- 获取中断优先级控制位的值 ---------*/
+    switch (tmpreg)
+ 368:	52 38       	CMP       R5, #2
+ 36a:	33 f0       	JZ        $+51                  ;->0x3d0
+ 36c:	52 38       	CMP       R5, #2
+ 36e:	1d f9       	JLS       $+29                  ;->0x3a8
+ 370:	54 38       	CMP       R5, #4
+ 372:	38 f0       	JZ        $+56                  ;->0x3e2
+ 374:	56 38       	CMP       R5, #6
+ 376:	25 f0       	JZ        $+37                  ;->0x3c0
+ 378:	43 10       	MOV       R4, #3
+ 37a:	20 d5       	ANL       R4, R0, R4
+ 37c:	23 7a       	LSL       R4, #3
+ 37e:	24 c1       	ADD       R4, R4, #4
+ 380:	30 10       	MOV       R3, #0
+..\src\kf32a1x6_int.c:475
+        CHECK_RESTRICTION(0);
+        break;
+    }
+
+    /*--------- 配置中断优先级控制位 ---------*/
+    if (Peripheral <= INT_USART7)
+ 382:	0f 3c       	CMP       R0, #79
+ 384:	06 f8       	JHI       $+6                   ;->0x390
+..\src\kf32a1x6_int.c:479
+    {
+        /*---------------- 设置INT_IPx(x=0~18)寄存器 ----------------*/
+        /* 获取中断优先级寄存器地址 */
+        regoffset = (Peripheral - INT_Reserved4) >> 2;
+ 386:	28 cd       	SUB       R5, R0, #4
+ 388:	2a 7c       	LSR       R5, #2
+..\src\kf32a1x6_int.c:481
+        tmpreg = (uint32_t)&INT_IP0;
+        tmpreg = tmpreg + (regoffset << 2);
+ 38a:	2a 7a       	LSL       R5, #2
+ 38c:	06 42       	LD        R2, [PC + #6]         ;->0x3a4  :=0x40200034
+ 38e:	ad c2       	ADD       R5, R5, R2
+..\src\kf32a1x6_int.c:491
+    }
+
+    /*---------------- 设置INT_IPx(x=0~30)寄存器 ----------------*/
+    bitoffset = ((Peripheral & 0x3) * 8) + 4;
+    *(volatile uint32_t*)tmpreg
+          = SFR_Config (*(volatile uint32_t*)tmpreg,
+ 390:	25 82       	LD.W      R2, [R5]
+..\src\kf32a1x6_int.c:492
+                      ~(0xF << bitoffset),
+ 392:	1f 10       	MOV       R1, #15
+ 394:	21 db       	LSL       R4, R1, R4
+ 396:	44 68       	NOT       R4, R4
+KF32A156.h:14083
+ 398:	22 d5       	ANL       R4, R2, R4
+ 39a:	e4 d6       	ORL       R4, R4, R3
+..\src\kf32a1x6_int.c:491
+    }
+
+    /*---------------- 设置INT_IPx(x=0~30)寄存器 ----------------*/
+    bitoffset = ((Peripheral & 0x3) * 8) + 4;
+    *(volatile uint32_t*)tmpreg
+          = SFR_Config (*(volatile uint32_t*)tmpreg,
+ 39c:	54 85       	ST.W      [R5], R4
+..\src\kf32a1x6_int.c:494
+                      ~(0xF << bitoffset),
+                      priorityconfig << bitoffset);
+}
+ 39e:	1d 5c       	JMP       LR
+ 3a0:	00 00 20 40 	.long     0x40200000 ->1075838976  [!!!@2@:NOP      	@@: LD        R0, [PC + #32]        ;->0x420  :=0xd48d1027
+ 3a4:	34 00 20 40 	.long     0x40200034 ->1075839028 
+..\src\kf32a1x6_int.c:455
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PERIPHERAL_INTERRUPT_INDEX(Peripheral));
+    CHECK_RESTRICTION(CHECK_PRIORITY_CONFIG(tmpreg, Preemption, SubPriority));
+
+    /*--------- 获取中断优先级控制位的值 ---------*/
+    switch (tmpreg)
+ 3a8:	50 38       	CMP       R5, #0
+ 3aa:	e7 f1       	JNZ       $-25                  ;->0x378
+ 3ac:	43 10       	MOV       R4, #3
+ 3ae:	20 d5       	ANL       R4, R0, R4
+ 3b0:	23 7a       	LSL       R4, #3
+ 3b2:	24 c1       	ADD       R4, R4, #4
+..\src\kf32a1x6_int.c:458
+    {
+    case INT_PRIORITY_GROUP_3VS1:
+        priorityconfig = (Preemption << 1) | (SubPriority & 0x1);
+ 3b4:	31 10       	MOV       R3, #1
+ 3b6:	da d4       	ANL       R3, R2, R3
+ 3b8:	49 c2       	ADD       R1, R1, R1
+ 3ba:	5b d6       	ORL       R3, R3, R1
+ 3bc:	1b db       	LSL       R3, R3, R4
+..\src\kf32a1x6_int.c:459
+        break;
+ 3be:	e2 07       	SJMP      $-30                  ;->0x382
+ 3c0:	43 10       	MOV       R4, #3
+ 3c2:	20 d5       	ANL       R4, R0, R4
+ 3c4:	23 7a       	LSL       R4, #3
+ 3c6:	24 c1       	ADD       R4, R4, #4
+..\src\kf32a1x6_int.c:467
+        break;
+    case INT_PRIORITY_GROUP_1VS3:
+        priorityconfig = (Preemption << 3) | (SubPriority & 0x7);
+        break;
+    case INT_PRIORITY_GROUP_0VS4:
+        priorityconfig = SubPriority & 0xF;
+ 3c8:	3f 10       	MOV       R3, #15
+ 3ca:	da d4       	ANL       R3, R2, R3
+ 3cc:	1b db       	LSL       R3, R3, R4
+..\src\kf32a1x6_int.c:468
+        break;
+ 3ce:	da 07       	SJMP      $-38                  ;->0x382
+ 3d0:	33 10       	MOV       R3, #3
+ 3d2:	e0 d4       	ANL       R4, R0, R3
+ 3d4:	e4 da       	LSL       R4, R4, R3
+ 3d6:	24 c1       	ADD       R4, R4, #4
+..\src\kf32a1x6_int.c:461
+    {
+    case INT_PRIORITY_GROUP_3VS1:
+        priorityconfig = (Preemption << 1) | (SubPriority & 0x1);
+        break;
+    case INT_PRIORITY_GROUP_2VS2:
+        priorityconfig = (Preemption << 2) | (SubPriority & 0x3);
+ 3d8:	da d4       	ANL       R3, R2, R3
+ 3da:	0a 7a       	LSL       R1, #2
+ 3dc:	5b d6       	ORL       R3, R3, R1
+ 3de:	1b db       	LSL       R3, R3, R4
+..\src\kf32a1x6_int.c:462
+        break;
+ 3e0:	d1 07       	SJMP      $-47                  ;->0x382
+ 3e2:	43 10       	MOV       R4, #3
+ 3e4:	20 d5       	ANL       R4, R0, R4
+ 3e6:	23 7a       	LSL       R4, #3
+ 3e8:	24 c1       	ADD       R4, R4, #4
+..\src\kf32a1x6_int.c:464
+    case INT_PRIORITY_GROUP_1VS3:
+        priorityconfig = (Preemption << 3) | (SubPriority & 0x7);
+ 3ea:	37 10       	MOV       R3, #7
+ 3ec:	da d4       	ANL       R3, R2, R3
+ 3ee:	0b 7a       	LSL       R1, #3
+ 3f0:	5b d6       	ORL       R3, R3, R1
+ 3f2:	1b db       	LSL       R3, R3, R4
+..\src\kf32a1x6_int.c:465
+        break;
+ 3f4:	c7 07       	SJMP      $-57                  ;->0x382
+	...
+
+000003f8 <INT_External_Configuration>:
+INT_External_Configuration():
+..\src\kf32a1x6_int.c:528
+  * 描述  外部中断(EINT)配置，并使能中断。
+  * 输入  eintInitStruct: 外部中断配置信息结构体指针。
+  * 返回  无。
+  */
+void INT_External_Configuration (EINT_InitTypeDef* eintInitStruct)
+{
+ 3f8:	03 5f       	PUSH      {R6-R7}
+..\src\kf32a1x6_int.c:541
+    CHECK_RESTRICTION(CHECK_INT_EXTERNAL_SOURCE(eintInitStruct->m_Source));
+
+    /* 使能上升沿中断 */
+    /*------------------ 设置INT_EINTRISE寄存器 -----------------*/
+    /* 根据结构体成员m_Line和m_Rise，设置EINTRI位域 */
+    INT_EINTRISE = SFR_Config(INT_EINTRISE,
+ 3fa:	17 44       	LD        R4, [PC + #23]        ;->0x454  :=0x40200000
+ 3fc:	24 18       	MOV       R2, #132
+ 3fe:	8c e8       	LD.W      R1, [R4 + R2]
+..\src\kf32a1x6_int.c:542
+    		~(INT_EINTRISE_EINTRI0 << eintInitStruct->m_Line),
+ 400:	50 82       	LD.W      R5, [R0]
+ 402:	31 10       	MOV       R3, #1
+ 404:	5b db       	LSL       R3, R3, R5
+..\src\kf32a1x6_int.c:541
+    CHECK_RESTRICTION(CHECK_INT_EXTERNAL_SOURCE(eintInitStruct->m_Source));
+
+    /* 使能上升沿中断 */
+    /*------------------ 设置INT_EINTRISE寄存器 -----------------*/
+    /* 根据结构体成员m_Line和m_Rise，设置EINTRI位域 */
+    INT_EINTRISE = SFR_Config(INT_EINTRISE,
+ 406:	33 68       	NOT       R3, R3
+KF32A156.h:14083
+ 408:	4b d4       	ANL       R1, R3, R1
+..\src\kf32a1x6_int.c:541
+ 40a:	b8 98       	LD.W      R7, [R0 + #2]
+ 40c:	77 db       	LSL       R6, R7, R5
+KF32A156.h:14083
+ 40e:	89 d7       	ORL       R1, R1, R6
+..\src\kf32a1x6_int.c:541
+ 410:	a1 ee       	ST.W      [R4 + R2], R1
+..\src\kf32a1x6_int.c:548
+    		eintInitStruct->m_Rise << eintInitStruct->m_Line);
+
+    /* 使能下降沿中断 */
+    /*------------------ 设置INT_EINTFALL寄存器 -----------------*/
+    /* 根据结构体成员m_Line和m_Fall，设置EINTFA位域 */
+    INT_EINTFALL = SFR_Config(INT_EINTFALL,
+ 412:	28 18       	MOV       R2, #136
+ 414:	8c e8       	LD.W      R1, [R4 + R2]
+KF32A156.h:14083
+ 416:	4b d4       	ANL       R1, R3, R1
+..\src\kf32a1x6_int.c:548
+ 418:	f8 98       	LD.W      R7, [R0 + #3]
+ 41a:	77 db       	LSL       R6, R7, R5
+KF32A156.h:14083
+ 41c:	89 d7       	ORL       R1, R1, R6
+..\src\kf32a1x6_int.c:548
+ 41e:	a1 ee       	ST.W      [R4 + R2], R1
+..\src\kf32a1x6_int.c:555
+    		eintInitStruct->m_Fall << eintInitStruct->m_Line);
+
+    /* 选择中断源 */
+    /*------------------ 设置INT_EINTSSx寄存器 -----------------*/
+    /* 根据结构体成员m_Line和m_Source，设置EINTRI位域 */
+    tmpreg = (eintInitStruct->m_Line % 8) * 4;
+ 420:	27 10       	MOV       R2, #7
+ 422:	8d d4       	ANL       R1, R5, R2
+ 424:	0a 7a       	LSL       R1, #2
+..\src\kf32a1x6_int.c:556
+    if(eintInitStruct->m_Line <= 0x07)
+ 426:	52 70       	CMP       R5, R2
+ 428:	18 f9       	JLS       $+24                  ;->0x458
+..\src\kf32a1x6_int.c:560
+    {
+    	INT_EINTSS0 = SFR_Config (INT_EINTSS0, ~(0x07 << tmpreg), eintInitStruct->m_Source << tmpreg);
+    }
+    else if(eintInitStruct->m_Line <= 0x0F)
+ 42a:	5f 38       	CMP       R5, #15
+ 42c:	0a f8       	JHI       $+10                  ;->0x440
+..\src\kf32a1x6_int.c:562
+    {
+    	INT_EINTSS1 = SFR_Config (INT_EINTSS1, ~(0x07 << tmpreg), eintInitStruct->m_Source << tmpreg);
+ 42e:	68 19       	MOV       R6, #152
+ 430:	bc e9       	LD.W      R7, [R4 + R6]
+ 432:	52 da       	LSL       R2, R2, R1
+ 434:	22 68       	NOT       R2, R2
+KF32A156.h:14083
+ 436:	d2 d5       	ANL       R2, R2, R7
+..\src\kf32a1x6_int.c:562
+ 438:	38 99       	LD.W      R7, [R0 + #4]
+ 43a:	4f da       	LSL       R1, R7, R1
+KF32A156.h:14083
+ 43c:	4a d6       	ORL       R1, R2, R1
+..\src\kf32a1x6_int.c:562
+ 43e:	a1 ef       	ST.W      [R4 + R6], R1
+..\src\kf32a1x6_int.c:572
+    }
+
+    /* 使能外部中断 */
+    /*------------------ 设置INT_EINTMASK寄存器 -----------------*/
+    /* 根据结构体成员m_Line和m_Mask，设置EINTM位域 */
+    INT_EINTMASK = SFR_Config (INT_EINTMASK,
+ 440:	05 42       	LD        R2, [PC + #5]         ;->0x454  :=0x40200000
+ 442:	40 18       	MOV       R4, #128
+ 444:	0a e9       	LD.W      R1, [R2 + R4]
+KF32A156.h:14083
+ 446:	5b d4       	ANL       R3, R3, R1
+..\src\kf32a1x6_int.c:572
+ 448:	48 98       	LD.W      R1, [R0 + #1]
+ 44a:	69 db       	LSL       R5, R1, R5
+KF32A156.h:14083
+ 44c:	6b d7       	ORL       R5, R3, R5
+..\src\kf32a1x6_int.c:572
+ 44e:	15 ef       	ST.W      [R2 + R4], R5
+..\src\kf32a1x6_int.c:575
+                          ~(INT_EINTMASK_EINTM0 << eintInitStruct->m_Line),
+                          eintInitStruct->m_Mask << eintInitStruct->m_Line);
+}
+ 450:	03 5e       	POP       {R6-R7}
+ 452:	1d 5c       	JMP       LR
+ 454:	00 00 20 40 	.long     0x40200000 ->1075838976  [!!!@2@:NOP      	@@: LD        R0, [PC + #32]        ;->0x4d4  :=0x5c1d4ea8
+..\src\kf32a1x6_int.c:558
+    /*------------------ 设置INT_EINTSSx寄存器 -----------------*/
+    /* 根据结构体成员m_Line和m_Source，设置EINTRI位域 */
+    tmpreg = (eintInitStruct->m_Line % 8) * 4;
+    if(eintInitStruct->m_Line <= 0x07)
+    {
+    	INT_EINTSS0 = SFR_Config (INT_EINTSS0, ~(0x07 << tmpreg), eintInitStruct->m_Source << tmpreg);
+ 458:	64 19       	MOV       R6, #148
+ 45a:	eb 07       	SJMP      $-21                  ;->0x430
+
+0000045c <OSC_LFCK_Division_Config>:
+OSC_LFCK_Division_Config():
+..\src\kf32a1x6_osc.c:197
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_LFCK_DIVISION(LFDivision));
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKDIV位 ----------------*/
+    tmpreg = LFDivision << OSC_CTL0_LFCKDIV0_POS;
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_LFCKDIV, tmpreg);
+ 45c:	51 10       	MOV       R5, #1
+ 45e:	ae 7b       	LSL       R5, #30
+ 460:	45 82       	LD.W      R4, [R5]
+..\src\kf32a1x6_osc.c:196
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_LFCK_DIVISION(LFDivision));
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKDIV位 ----------------*/
+    tmpreg = LFDivision << OSC_CTL0_LFCKDIV0_POS;
+ 462:	80 7b       	LSL       R0, #24
+KF32A156.h:14083
+ 464:	03 43       	LD        R3, [PC + #3]         ;->0x470  :=0xf8ffffff
+ 466:	e4 d4       	ANL       R4, R4, R3
+ 468:	20 d7       	ORL       R4, R0, R4
+..\src\kf32a1x6_osc.c:197
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_LFCKDIV, tmpreg);
+ 46a:	54 85       	ST.W      [R5], R4
+..\src\kf32a1x6_osc.c:198
+}
+ 46c:	1d 5c       	JMP       LR
+ 46e:	00 00       	NOP      NOP      
+ 470:	ff ff ff f8 	.long     0xf8ffffff ->-117440513 
+
+00000474 <OSC_HFCK_Division_Config>:
+OSC_HFCK_Division_Config():
+..\src\kf32a1x6_osc.c:224
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_HFCK_DIVISION(HFDivision));
+
+    /*---------------- 设置OSC_CTL0寄存器HFCKDIV位 ----------------*/
+    tmpreg = HFDivision << OSC_CTL0_HFCKDIV0_POS;
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_HFCKDIV, tmpreg);
+ 474:	51 10       	MOV       R5, #1
+ 476:	ae 7b       	LSL       R5, #30
+ 478:	45 82       	LD.W      R4, [R5]
+..\src\kf32a1x6_osc.c:223
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_HFCK_DIVISION(HFDivision));
+
+    /*---------------- 设置OSC_CTL0寄存器HFCKDIV位 ----------------*/
+    tmpreg = HFDivision << OSC_CTL0_HFCKDIV0_POS;
+ 47a:	04 7b       	LSL       R0, #20
+KF32A156.h:14083
+ 47c:	03 43       	LD        R3, [PC + #3]         ;->0x488  :=0xff0fffff
+ 47e:	e4 d4       	ANL       R4, R4, R3
+ 480:	20 d7       	ORL       R4, R0, R4
+..\src\kf32a1x6_osc.c:224
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_HFCKDIV, tmpreg);
+ 482:	54 85       	ST.W      [R5], R4
+..\src\kf32a1x6_osc.c:225
+}
+ 484:	1d 5c       	JMP       LR
+ 486:	00 00       	NOP      NOP      
+ 488:	ff ff 0f ff 	.long     0xff0fffff ->-15728641 
+
+0000048c <OSC_SCK_Division_Config>:
+OSC_SCK_Division_Config():
+..\src\kf32a1x6_osc.c:249
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_SCLK_DIVISION(SclkDivision));
+
+    /*---------------- 设置OSC_CTL0寄存器SCKDIV位 ----------------*/
+    tmpreg = SclkDivision << OSC_CTL0_SCKDIV0_POS;
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_SCKDIV, tmpreg);
+ 48c:	51 10       	MOV       R5, #1
+ 48e:	ae 7b       	LSL       R5, #30
+ 490:	45 82       	LD.W      R4, [R5]
+..\src\kf32a1x6_osc.c:248
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_SCLK_DIVISION(SclkDivision));
+
+    /*---------------- 设置OSC_CTL0寄存器SCKDIV位 ----------------*/
+    tmpreg = SclkDivision << OSC_CTL0_SCKDIV0_POS;
+ 492:	00 7b       	LSL       R0, #16
+KF32A156.h:14083
+ 494:	03 43       	LD        R3, [PC + #3]         ;->0x4a0  :=0xfff8ffff
+ 496:	e4 d4       	ANL       R4, R4, R3
+ 498:	20 d7       	ORL       R4, R0, R4
+..\src\kf32a1x6_osc.c:249
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_SCKDIV, tmpreg);
+ 49a:	54 85       	ST.W      [R5], R4
+..\src\kf32a1x6_osc.c:250
+}
+ 49c:	1d 5c       	JMP       LR
+ 49e:	00 00       	NOP      NOP      
+ 4a0:	ff ff f8 ff 	.long     0xfff8ffff ->-00458753 
+
+000004a4 <OSC_PLL_Input_Source_Config>:
+OSC_PLL_Input_Source_Config():
+..\src\kf32a1x6_osc.c:268
+
+    /*---------------- 设置OSC_CTL0寄存器PLL0CKS位 ----------------*/
+    if (NewState != PLL_INPUT_INTHF)
+    {
+        /* 选择EXTHF作为PLL输入时钟 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_PLLCKS_POS);
+ 4a4:	51 10       	MOV       R5, #1
+ 4a6:	ae 7b       	LSL       R5, #30
+..\src\kf32a1x6_osc.c:265
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PLL_INPUT(NewState));
+
+    /*---------------- 设置OSC_CTL0寄存器PLL0CKS位 ----------------*/
+    if (NewState != PLL_INPUT_INTHF)
+ 4a8:	00 38       	CMP       R0, #0
+ 4aa:	03 f1       	JNZ       $+3                   ;->0x4b0
+..\src\kf32a1x6_osc.c:273
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_PLLCKS_POS);
+    }
+    else
+    {
+        /* 选择INTHF作为PLL输入时钟 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_PLLCKS_POS);
+ 4ac:	ac 4e       	CLR       [R5], #12
+..\src\kf32a1x6_osc.c:275
+    }
+}
+ 4ae:	1d 5c       	JMP       LR
+..\src\kf32a1x6_osc.c:268
+
+    /*---------------- 设置OSC_CTL0寄存器PLL0CKS位 ----------------*/
+    if (NewState != PLL_INPUT_INTHF)
+    {
+        /* 选择EXTHF作为PLL输入时钟 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_PLLCKS_POS);
+ 4b0:	ac 4c       	SET       [R5], #12
+..\src\kf32a1x6_osc.c:275
+    else
+    {
+        /* 选择INTHF作为PLL输入时钟 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_PLLCKS_POS);
+    }
+}
+ 4b2:	1d 5c       	JMP       LR
+
+000004b4 <OSC_HFCK_Source_Config>:
+OSC_HFCK_Source_Config():
+..\src\kf32a1x6_osc.c:295
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_HFCK_SOURCE(HFSource));
+
+    /*---------------- 设置OSC_CTL0寄存器HFCKS位 ----------------*/
+    tmpreg = HFSource << OSC_CTL0_HFCKS0_POS;
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_HFCKS, tmpreg);
+ 4b4:	51 10       	MOV       R5, #1
+ 4b6:	ae 7b       	LSL       R5, #30
+ 4b8:	45 82       	LD.W      R4, [R5]
+..\src\kf32a1x6_osc.c:294
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_HFCK_SOURCE(HFSource));
+
+    /*---------------- 设置OSC_CTL0寄存器HFCKS位 ----------------*/
+    tmpreg = HFSource << OSC_CTL0_HFCKS0_POS;
+ 4ba:	81 7a       	LSL       R0, #9
+KF32A156.h:14083
+ 4bc:	03 43       	LD        R3, [PC + #3]         ;->0x4c8  :=0xfffff1ff
+ 4be:	e4 d4       	ANL       R4, R4, R3
+ 4c0:	20 d7       	ORL       R4, R0, R4
+..\src\kf32a1x6_osc.c:295
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_HFCKS, tmpreg);
+ 4c2:	54 85       	ST.W      [R5], R4
+..\src\kf32a1x6_osc.c:296
+}
+ 4c4:	1d 5c       	JMP       LR
+ 4c6:	00 00       	NOP      NOP      
+ 4c8:	ff f1 ff ff 	.long     0xfffff1ff ->-00003585 
+
+000004cc <OSC_HFCK_Enable>:
+OSC_HFCK_Enable():
+..\src\kf32a1x6_osc.c:313
+
+    /*---------------- 设置OSC_CTL0寄存器HFCKEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* HFCLK时钟信号允许 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_HFCKEN_POS);
+ 4cc:	51 10       	MOV       R5, #1
+ 4ce:	ae 7b       	LSL       R5, #30
+..\src\kf32a1x6_osc.c:310
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置OSC_CTL0寄存器HFCKEN位 ----------------*/
+    if (NewState != FALSE)
+ 4d0:	00 38       	CMP       R0, #0
+ 4d2:	03 f1       	JNZ       $+3                   ;->0x4d8
+..\src\kf32a1x6_osc.c:318
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_HFCKEN_POS);
+    }
+    else
+    {
+        /* HFCLK时钟信号禁止 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_HFCKEN_POS);
+ 4d4:	a8 4e       	CLR       [R5], #8
+..\src\kf32a1x6_osc.c:320
+    }
+}
+ 4d6:	1d 5c       	JMP       LR
+..\src\kf32a1x6_osc.c:313
+
+    /*---------------- 设置OSC_CTL0寄存器HFCKEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* HFCLK时钟信号允许 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_HFCKEN_POS);
+ 4d8:	a8 4c       	SET       [R5], #8
+..\src\kf32a1x6_osc.c:320
+    else
+    {
+        /* HFCLK时钟信号禁止 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_HFCKEN_POS);
+    }
+}
+ 4da:	1d 5c       	JMP       LR
+
+000004dc <OSC_LFCK_Source_Config>:
+OSC_LFCK_Source_Config():
+..\src\kf32a1x6_osc.c:338
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKS位 ----------------*/
+    if (NewState != LFCK_INPUT_INTLF)
+    {
+        /* 选择EXTLF作为LFCLK时钟 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKS_POS);
+ 4dc:	51 10       	MOV       R5, #1
+ 4de:	ae 7b       	LSL       R5, #30
+..\src\kf32a1x6_osc.c:335
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_LFCK_INPUT(NewState));
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKS位 ----------------*/
+    if (NewState != LFCK_INPUT_INTLF)
+ 4e0:	00 38       	CMP       R0, #0
+ 4e2:	03 f1       	JNZ       $+3                   ;->0x4e8
+..\src\kf32a1x6_osc.c:343
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKS_POS);
+    }
+    else
+    {
+        /* 选择INTLF作为LFCLK时钟 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKS_POS);
+ 4e4:	2e 4e       	CLR       [R5], #6
+..\src\kf32a1x6_osc.c:345
+    }
+}
+ 4e6:	1d 5c       	JMP       LR
+..\src\kf32a1x6_osc.c:338
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKS位 ----------------*/
+    if (NewState != LFCK_INPUT_INTLF)
+    {
+        /* 选择EXTLF作为LFCLK时钟 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKS_POS);
+ 4e8:	2e 4c       	SET       [R5], #6
+..\src\kf32a1x6_osc.c:345
+    else
+    {
+        /* 选择INTLF作为LFCLK时钟 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKS_POS);
+    }
+}
+ 4ea:	1d 5c       	JMP       LR
+
+000004ec <OSC_LFCK_Enable>:
+OSC_LFCK_Enable():
+..\src\kf32a1x6_osc.c:362
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* LFCLK时钟信号允许 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKEN_POS);
+ 4ec:	51 10       	MOV       R5, #1
+ 4ee:	ae 7b       	LSL       R5, #30
+..\src\kf32a1x6_osc.c:359
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKEN位 ----------------*/
+    if (NewState != FALSE)
+ 4f0:	00 38       	CMP       R0, #0
+ 4f2:	03 f1       	JNZ       $+3                   ;->0x4f8
+..\src\kf32a1x6_osc.c:367
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKEN_POS);
+    }
+    else
+    {
+        /* LFCLK时钟信号禁止 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKEN_POS);
+ 4f4:	2c 4e       	CLR       [R5], #4
+..\src\kf32a1x6_osc.c:369
+    }
+}
+ 4f6:	1d 5c       	JMP       LR
+..\src\kf32a1x6_osc.c:362
+
+    /*---------------- 设置OSC_CTL0寄存器LFCKEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* LFCLK时钟信号允许 */
+        SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKEN_POS);
+ 4f8:	2c 4c       	SET       [R5], #4
+..\src\kf32a1x6_osc.c:369
+    else
+    {
+        /* LFCLK时钟信号禁止 */
+        SFR_CLR_BIT_ASM(OSC_CTL0, OSC_CTL0_LFCKEN_POS);
+    }
+}
+ 4fa:	1d 5c       	JMP       LR
+
+000004fc <OSC_SCK_Source_Config>:
+OSC_SCK_Source_Config():
+..\src\kf32a1x6_osc.c:391
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_SCLK_SOURCE(SclkSource));
+
+    /*---------------- 设置OSC_CTL0寄存器SCKS位 ----------------*/
+    tmpreg = SclkSource << OSC_CTL0_SCKS0_POS;
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_SCKS, tmpreg);
+ 4fc:	51 10       	MOV       R5, #1
+ 4fe:	ae 7b       	LSL       R5, #30
+ 500:	45 82       	LD.W      R4, [R5]
+..\src\kf32a1x6_osc.c:390
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_SCLK_SOURCE(SclkSource));
+
+    /*---------------- 设置OSC_CTL0寄存器SCKS位 ----------------*/
+    tmpreg = SclkSource << OSC_CTL0_SCKS0_POS;
+ 502:	00 c2       	ADD       R0, R0, R0
+KF32A156.h:14083
+ 504:	3e 10       	MOV       R3, #14
+ 506:	33 68       	NOT       R3, R3
+ 508:	e4 d4       	ANL       R4, R4, R3
+ 50a:	20 d7       	ORL       R4, R0, R4
+..\src\kf32a1x6_osc.c:391
+    OSC_CTL0 = SFR_Config (OSC_CTL0, ~OSC_CTL0_SCKS, tmpreg);
+ 50c:	54 85       	ST.W      [R5], R4
+..\src\kf32a1x6_osc.c:392
+}
+ 50e:	1d 5c       	JMP       LR
+
+00000510 <OSC_PLL_Multiple_Value_Select>:
+OSC_PLL_Multiple_Value_Select():
+..\src\kf32a1x6_osc.c:578
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PLL_MULTIPLE_MValue(PLLmultiple_M));
+    CHECK_RESTRICTION(CHECK_PLL_MULTIPLE_NValue(PLLmultiple_N));
+    CHECK_RESTRICTION(CHECK_PLL_MULTIPLE_NOValue(PLLmultiple_NO));
+
+    if(PLLmultiple_NO==8){PLLmultiple_NO=3;}
+ 510:	28 38       	CMP       R2, #8
+ 512:	19 f0       	JZ        $+25                  ;->0x544
+..\src\kf32a1x6_osc.c:579
+    else if(PLLmultiple_NO==4){PLLmultiple_NO=2;}
+ 514:	24 38       	CMP       R2, #4
+ 516:	19 f0       	JZ        $+25                  ;->0x548
+..\src\kf32a1x6_osc.c:580
+    else if(PLLmultiple_NO==2){PLLmultiple_NO=1;}
+ 518:	22 38       	CMP       R2, #2
+ 51a:	1a f0       	JZ        $+26                  ;->0x54e
+..\src\kf32a1x6_osc.c:581
+    else if(PLLmultiple_NO==1){PLLmultiple_NO=0;}
+ 51c:	40 10       	MOV       R4, #0
+ 51e:	21 38       	CMP       R2, #1
+ 520:	03 f0       	JZ        $+3                   ;->0x526
+ 522:	54 11       	MOV       R5, #20
+ 524:	62 db       	LSL       R4, R2, R5
+..\src\kf32a1x6_osc.c:588
+    /*---------------- 设置PLL_CTL寄存器OD位N位M位 ----------------*/
+    tmpreg = ((PLLmultiple_M << PLL_CTL_M0_POS) \
+    		 | (PLLmultiple_N << PLL_CTL_N0_POS) \
+    		 | (PLLmultiple_NO << PLL_CTL_OD0_POS));
+
+    PLL_CTL = SFR_Config (PLL_CTL, ~(PLL_CTL_M | PLL_CTL_N | PLL_CTL_OD), tmpreg);
+ 526:	06 45       	LD        R5, [PC + #6]         ;->0x53c  :=0x40002580
+ 528:	25 82       	LD.W      R2, [R5]
+..\src\kf32a1x6_osc.c:584
+    else if(PLLmultiple_NO==4){PLLmultiple_NO=2;}
+    else if(PLLmultiple_NO==2){PLLmultiple_NO=1;}
+    else if(PLLmultiple_NO==1){PLLmultiple_NO=0;}
+
+    /*---------------- 设置PLL_CTL寄存器OD位N位M位 ----------------*/
+    tmpreg = ((PLLmultiple_M << PLL_CTL_M0_POS) \
+ 52a:	02 7a       	LSL       R0, #2
+KF32A156.h:14083
+ 52c:	05 43       	LD        R3, [PC + #5]         ;->0x540  :=0xffc00003
+ 52e:	da d4       	ANL       R3, R2, R3
+..\src\kf32a1x6_osc.c:585
+    		 | (PLLmultiple_N << PLL_CTL_N0_POS) \
+ 530:	c0 d6       	ORL       R0, R0, R3
+ 532:	08 7b       	LSL       R1, #16
+..\src\kf32a1x6_osc.c:584
+    else if(PLLmultiple_NO==4){PLLmultiple_NO=2;}
+    else if(PLLmultiple_NO==2){PLLmultiple_NO=1;}
+    else if(PLLmultiple_NO==1){PLLmultiple_NO=0;}
+
+    /*---------------- 设置PLL_CTL寄存器OD位N位M位 ----------------*/
+    tmpreg = ((PLLmultiple_M << PLL_CTL_M0_POS) \
+ 534:	48 d6       	ORL       R1, R0, R1
+KF32A156.h:14083
+ 536:	21 d7       	ORL       R4, R1, R4
+..\src\kf32a1x6_osc.c:588
+    		 | (PLLmultiple_N << PLL_CTL_N0_POS) \
+    		 | (PLLmultiple_NO << PLL_CTL_OD0_POS));
+
+    PLL_CTL = SFR_Config (PLL_CTL, ~(PLL_CTL_M | PLL_CTL_N | PLL_CTL_OD), tmpreg);
+ 538:	54 85       	ST.W      [R5], R4
+..\src\kf32a1x6_osc.c:589
+}
+ 53a:	1d 5c       	JMP       LR
+ 53c:	80 25 00 40 	.long     0x40002580 ->1073751424  [!!!@2@:ST.W      [SP + #128], R5	@@: LD        R0, [PC + #0]         ;->0x53c  :=0x40002580
+ 540:	03 00 c0 ff 	.long     0xffc00003 ->-04194301 
+..\src\kf32a1x6_osc.c:578
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PLL_MULTIPLE_MValue(PLLmultiple_M));
+    CHECK_RESTRICTION(CHECK_PLL_MULTIPLE_NValue(PLLmultiple_N));
+    CHECK_RESTRICTION(CHECK_PLL_MULTIPLE_NOValue(PLLmultiple_NO));
+
+    if(PLLmultiple_NO==8){PLLmultiple_NO=3;}
+ 544:	04 44       	LD        R4, [PC + #4]         ;->0x554  :=0x300000
+ 546:	f0 07       	SJMP      $-16                  ;->0x526
+..\src\kf32a1x6_osc.c:579
+    else if(PLLmultiple_NO==4){PLLmultiple_NO=2;}
+ 548:	41 10       	MOV       R4, #1
+ 54a:	25 7b       	LSL       R4, #21
+ 54c:	ed 07       	SJMP      $-19                  ;->0x526
+..\src\kf32a1x6_osc.c:580
+    else if(PLLmultiple_NO==2){PLLmultiple_NO=1;}
+ 54e:	41 10       	MOV       R4, #1
+ 550:	24 7b       	LSL       R4, #20
+ 552:	ea 07       	SJMP      $-22                  ;->0x526
+ 554:	00 00 30 00 	.long     0x00300000 ->003145728 
+
+00000558 <OSC_PLL_RST>:
+OSC_PLL_RST():
+..\src\kf32a1x6_osc.c:599
+  * 返回 ：无
+  */
+void OSC_PLL_RST(void)
+{
+    /*---------------- 设置PLL_CTL寄存器PDRST位 ----------------*/
+    SFR_SET_BIT_ASM(PLL_CTL, PLL_CTL_PDRST_POS);
+ 558:	02 45       	LD        R5, [PC + #2]         ;->0x560  :=0x40002580
+ 55a:	28 4c       	SET       [R5], #0
+..\src\kf32a1x6_osc.c:600
+}
+ 55c:	1d 5c       	JMP       LR
+ 55e:	00 00       	NOP      NOP      
+ 560:	80 25 00 40 	.long     0x40002580 ->1073751424  [!!!@2@:ST.W      [SP + #128], R5	@@: LD        R0, [PC + #0]         ;->0x560  :=0x40002580
+
+00000564 <OSC_PLL_Start_Delay_Config>:
+OSC_PLL_Start_Delay_Config():
+..\src\kf32a1x6_osc.c:626
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PLL_START_DELAY(PLLDelay));
+
+    /*---------------- 设置OSC_CTL2寄存器PLLDLY位 ----------------*/
+    tmpreg = PLLDelay << OSC_CTL2_PLLDLY0_POS;
+    OSC_CTL2 = SFR_Config (OSC_CTL2, ~OSC_CTL2_PLLDLY, tmpreg);
+ 564:	51 10       	MOV       R5, #1
+ 566:	ae 7b       	LSL       R5, #30
+ 568:	e5 98       	LD.W      R4, [R5 + #3]
+..\src\kf32a1x6_osc.c:625
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_PLL_START_DELAY(PLLDelay));
+
+    /*---------------- 设置OSC_CTL2寄存器PLLDLY位 ----------------*/
+    tmpreg = PLLDelay << OSC_CTL2_PLLDLY0_POS;
+ 56a:	80 7b       	LSL       R0, #24
+KF32A156.h:14083
+ 56c:	03 43       	LD        R3, [PC + #3]         ;->0x578  :=0xf0ffffff
+ 56e:	e4 d4       	ANL       R4, R4, R3
+ 570:	20 d7       	ORL       R4, R0, R4
+..\src\kf32a1x6_osc.c:626
+    OSC_CTL2 = SFR_Config (OSC_CTL2, ~OSC_CTL2_PLLDLY, tmpreg);
+ 572:	ec a0       	ST.W      [R5 + #3], R4
+..\src\kf32a1x6_osc.c:627
+}
+ 574:	1d 5c       	JMP       LR
+ 576:	00 00       	NOP      NOP      
+ 578:	ff ff ff f0 	.long     0xf0ffffff ->-251658241 
+
+0000057c <OSC_EXTHF_Start_Delay_Config>:
+OSC_EXTHF_Start_Delay_Config():
+..\src\kf32a1x6_osc.c:653
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_EXT_START_DELAY(ExternalDelay));
+
+    /*---------------- 设置OSC_CTL2寄存器EHFDLY位 ----------------*/
+    tmpreg = ExternalDelay << OSC_CTL2_EHFDLY0_POS;
+    OSC_CTL2 = SFR_Config (OSC_CTL2, ~OSC_CTL2_EHFDLY, tmpreg);
+ 57c:	51 10       	MOV       R5, #1
+ 57e:	ae 7b       	LSL       R5, #30
+ 580:	e5 98       	LD.W      R4, [R5 + #3]
+..\src\kf32a1x6_osc.c:652
+
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_EXT_START_DELAY(ExternalDelay));
+
+    /*---------------- 设置OSC_CTL2寄存器EHFDLY位 ----------------*/
+    tmpreg = ExternalDelay << OSC_CTL2_EHFDLY0_POS;
+ 582:	04 7b       	LSL       R0, #20
+KF32A156.h:14083
+ 584:	03 43       	LD        R3, [PC + #3]         ;->0x590  :=0xff0fffff
+ 586:	e4 d4       	ANL       R4, R4, R3
+ 588:	20 d7       	ORL       R4, R0, R4
+..\src\kf32a1x6_osc.c:653
+    OSC_CTL2 = SFR_Config (OSC_CTL2, ~OSC_CTL2_EHFDLY, tmpreg);
+ 58a:	ec a0       	ST.W      [R5 + #3], R4
+..\src\kf32a1x6_osc.c:654
+}
+ 58c:	1d 5c       	JMP       LR
+ 58e:	00 00       	NOP      NOP      
+ 590:	ff ff 0f ff 	.long     0xff0fffff ->-15728641 
+
+00000594 <OSC_PLL_Software_Enable>:
+OSC_PLL_Software_Enable():
+..\src\kf32a1x6_osc.c:720
+
+    /*---------------- 设置OSC_CTL2寄存器PLLSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能PLL工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_PLLSWEN_POS);
+ 594:	03 45       	LD        R5, [PC + #3]         ;->0x5a0  :=0x4000000c
+..\src\kf32a1x6_osc.c:717
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置OSC_CTL2寄存器PLLSWEN位 ----------------*/
+    if (NewState != FALSE)
+ 596:	00 38       	CMP       R0, #0
+ 598:	06 f1       	JNZ       $+6                   ;->0x5a4
+..\src\kf32a1x6_osc.c:725
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_PLLSWEN_POS);
+    }
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_PLLSWEN_POS);
+ 59a:	2c 4e       	CLR       [R5], #4
+..\src\kf32a1x6_osc.c:727
+    }
+}
+ 59c:	1d 5c       	JMP       LR
+ 59e:	00 00       	NOP      NOP      
+ 5a0:	0c 00 00 40 	.long     0x4000000c ->1073741836 
+..\src\kf32a1x6_osc.c:720
+
+    /*---------------- 设置OSC_CTL2寄存器PLLSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能PLL工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_PLLSWEN_POS);
+ 5a4:	2c 4c       	SET       [R5], #4
+..\src\kf32a1x6_osc.c:727
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_PLLSWEN_POS);
+    }
+}
+ 5a6:	1d 5c       	JMP       LR
+
+000005a8 <OSC_EXTHF_Software_Enable>:
+OSC_EXTHF_Software_Enable():
+..\src\kf32a1x6_osc.c:743
+
+    /*---------------- 设置OSC_CTL2寄存器EXTHFSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能外部高频振荡器工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_EXTHFSWEN_POS);
+ 5a8:	03 45       	LD        R5, [PC + #3]         ;->0x5b4  :=0x4000000c
+..\src\kf32a1x6_osc.c:740
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置OSC_CTL2寄存器EXTHFSWEN位 ----------------*/
+    if (NewState != FALSE)
+ 5aa:	00 38       	CMP       R0, #0
+ 5ac:	06 f1       	JNZ       $+6                   ;->0x5b8
+..\src\kf32a1x6_osc.c:748
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_EXTHFSWEN_POS);
+    }
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_EXTHFSWEN_POS);
+ 5ae:	2b 4e       	CLR       [R5], #3
+..\src\kf32a1x6_osc.c:750
+    }
+}
+ 5b0:	1d 5c       	JMP       LR
+ 5b2:	00 00       	NOP      NOP      
+ 5b4:	0c 00 00 40 	.long     0x4000000c ->1073741836 
+..\src\kf32a1x6_osc.c:743
+
+    /*---------------- 设置OSC_CTL2寄存器EXTHFSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能外部高频振荡器工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_EXTHFSWEN_POS);
+ 5b8:	2b 4c       	SET       [R5], #3
+..\src\kf32a1x6_osc.c:750
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_EXTHFSWEN_POS);
+    }
+}
+ 5ba:	1d 5c       	JMP       LR
+
+000005bc <OSC_INTHF_Software_Enable>:
+OSC_INTHF_Software_Enable():
+..\src\kf32a1x6_osc.c:789
+
+    /*---------------- 设置OSC_CTL2寄存器INTHFSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能内部高频振荡器工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_INTHFSWEN_POS);
+ 5bc:	03 45       	LD        R5, [PC + #3]         ;->0x5c8  :=0x4000000c
+..\src\kf32a1x6_osc.c:786
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置OSC_CTL2寄存器INTHFSWEN位 ----------------*/
+    if (NewState != FALSE)
+ 5be:	00 38       	CMP       R0, #0
+ 5c0:	06 f1       	JNZ       $+6                   ;->0x5cc
+..\src\kf32a1x6_osc.c:794
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_INTHFSWEN_POS);
+    }
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_INTHFSWEN_POS);
+ 5c2:	29 4e       	CLR       [R5], #1
+..\src\kf32a1x6_osc.c:796
+    }
+}
+ 5c4:	1d 5c       	JMP       LR
+ 5c6:	00 00       	NOP      NOP      
+ 5c8:	0c 00 00 40 	.long     0x4000000c ->1073741836 
+..\src\kf32a1x6_osc.c:789
+
+    /*---------------- 设置OSC_CTL2寄存器INTHFSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能内部高频振荡器工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_INTHFSWEN_POS);
+ 5cc:	29 4c       	SET       [R5], #1
+..\src\kf32a1x6_osc.c:796
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_INTHFSWEN_POS);
+    }
+}
+ 5ce:	1d 5c       	JMP       LR
+
+000005d0 <OSC_INTLF_Software_Enable>:
+OSC_INTLF_Software_Enable():
+..\src\kf32a1x6_osc.c:812
+
+    /*---------------- 设置OSC_CTL2寄存器INTLFSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能内部低频振荡器工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_INTLFSWEN_POS);
+ 5d0:	03 45       	LD        R5, [PC + #3]         ;->0x5dc  :=0x4000000c
+..\src\kf32a1x6_osc.c:809
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置OSC_CTL2寄存器INTLFSWEN位 ----------------*/
+    if (NewState != FALSE)
+ 5d2:	00 38       	CMP       R0, #0
+ 5d4:	06 f1       	JNZ       $+6                   ;->0x5e0
+..\src\kf32a1x6_osc.c:817
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_INTLFSWEN_POS);
+    }
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_INTLFSWEN_POS);
+ 5d6:	28 4e       	CLR       [R5], #0
+..\src\kf32a1x6_osc.c:819
+    }
+}
+ 5d8:	1d 5c       	JMP       LR
+ 5da:	00 00       	NOP      NOP      
+ 5dc:	0c 00 00 40 	.long     0x4000000c ->1073741836 
+..\src\kf32a1x6_osc.c:812
+
+    /*---------------- 设置OSC_CTL2寄存器INTLFSWEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能内部低频振荡器工作 */
+        SFR_SET_BIT_ASM(OSC_CTL2, OSC_CTL2_INTLFSWEN_POS);
+ 5e0:	28 4c       	SET       [R5], #0
+..\src\kf32a1x6_osc.c:819
+    else
+    {
+        /* 无效 */
+        SFR_CLR_BIT_ASM(OSC_CTL2, OSC_CTL2_INTLFSWEN_POS);
+    }
+}
+ 5e2:	1d 5c       	JMP       LR
+
+000005e4 <OSC_Get_PLL_INT_Flag>:
+OSC_Get_PLL_INT_Flag():
+..\src\kf32a1x6_osc.c:1173
+  * 返回  中断状态，0：未发生中断，1：发生中断。
+  */
+FlagStatus OSC_Get_PLL_INT_Flag (void)
+{
+    /*---------------- 设置OSC_INT寄存器PLLIF位 ----------------*/
+    if (OSC_INT & OSC_INT_PLLIF)
+ 5e4:	51 10       	MOV       R5, #1
+ 5e6:	ae 7b       	LSL       R5, #30
+ 5e8:	85 98       	LD.W      R0, [R5 + #2]
+ 5ea:	04 7c       	LSR       R0, #4
+..\src\kf32a1x6_osc.c:1183
+    else
+    {
+        /* PLL未锁定 */
+        return RESET;
+    }
+}
+ 5ec:	51 10       	MOV       R5, #1
+ 5ee:	40 d5       	ANL       R0, R0, R5
+ 5f0:	1d 5c       	JMP       LR
+
+000005f2 <OSC_Get_EXTHF_INT_Flag>:
+OSC_Get_EXTHF_INT_Flag():
+..\src\kf32a1x6_osc.c:1193
+  * 返回  中断状态，0：未发生中断，1：发生中断。
+  */
+FlagStatus OSC_Get_EXTHF_INT_Flag (void)
+{
+    /*---------------- 设置OSC_INT寄存器EHFIF位 ----------------*/
+    if (OSC_INT & OSC_INT_EHFIF)
+ 5f2:	51 10       	MOV       R5, #1
+ 5f4:	ae 7b       	LSL       R5, #30
+ 5f6:	85 98       	LD.W      R0, [R5 + #2]
+ 5f8:	03 7c       	LSR       R0, #3
+..\src\kf32a1x6_osc.c:1203
+    else
+    {
+        /* PLL未锁定 */
+        return RESET;
+    }
+}
+ 5fa:	51 10       	MOV       R5, #1
+ 5fc:	40 d5       	ANL       R0, R0, R5
+ 5fe:	1d 5c       	JMP       LR
+
+00000600 <OSC_Get_INTHF_INT_Flag>:
+OSC_Get_INTHF_INT_Flag():
+..\src\kf32a1x6_osc.c:1233
+  * 返回  中断状态，0：未发生中断，1：发生中断。
+  */
+FlagStatus OSC_Get_INTHF_INT_Flag (void)
+{
+    /*---------------- 设置OSC_INT寄存器IHFIF位 ----------------*/
+    if (OSC_INT & OSC_INT_IHFIF)
+ 600:	51 10       	MOV       R5, #1
+ 602:	ae 7b       	LSL       R5, #30
+ 604:	85 98       	LD.W      R0, [R5 + #2]
+ 606:	01 7c       	LSR       R0, #1
+..\src\kf32a1x6_osc.c:1243
+    else
+    {
+        /* PLL未锁定 */
+        return RESET;
+    }
+}
+ 608:	51 10       	MOV       R5, #1
+ 60a:	40 d5       	ANL       R0, R0, R5
+ 60c:	1d 5c       	JMP       LR
+	...
+
+00000610 <SYSTICK_Cmd>:
+SYSTICK_Cmd():
+..\src\kf32a1x6_systick.c:117
+
+    /*---------------- 设置ST_CTL寄存器STEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能系统节拍定时器 */
+        SFR_SET_BIT_ASM(ST_CTL, ST_CTL_STEN_POS);
+ 610:	03 45       	LD        R5, [PC + #3]         ;->0x61c  :=0x402000a0
+..\src\kf32a1x6_systick.c:114
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_FUNCTIONAL_STATE(NewState));
+
+    /*---------------- 设置ST_CTL寄存器STEN位 ----------------*/
+    if (NewState != FALSE)
+ 612:	00 38       	CMP       R0, #0
+ 614:	06 f1       	JNZ       $+6                   ;->0x620
+..\src\kf32a1x6_systick.c:122
+        SFR_SET_BIT_ASM(ST_CTL, ST_CTL_STEN_POS);
+    }
+    else
+    {
+        /* 禁止系统节拍定时器 */
+        SFR_CLR_BIT_ASM(ST_CTL, ST_CTL_STEN_POS);
+ 616:	28 4e       	CLR       [R5], #0
+..\src\kf32a1x6_systick.c:124
+    }
+}
+ 618:	1d 5c       	JMP       LR
+ 61a:	00 00       	NOP      NOP      
+ 61c:	a0 00 20 40 	.long     0x402000a0 ->1075839136 
+..\src\kf32a1x6_systick.c:117
+
+    /*---------------- 设置ST_CTL寄存器STEN位 ----------------*/
+    if (NewState != FALSE)
+    {
+        /* 使能系统节拍定时器 */
+        SFR_SET_BIT_ASM(ST_CTL, ST_CTL_STEN_POS);
+ 620:	28 4c       	SET       [R5], #0
+..\src\kf32a1x6_systick.c:124
+    else
+    {
+        /* 禁止系统节拍定时器 */
+        SFR_CLR_BIT_ASM(ST_CTL, ST_CTL_STEN_POS);
+    }
+}
+ 622:	1d 5c       	JMP       LR
+
+00000624 <SYSTICK_Clock_Config>:
+SYSTICK_Clock_Config():
+..\src\kf32a1x6_systick.c:144
+
+    /*---------------- 设置ST_CTL寄存器STCLKS位 ----------------*/
+    if (SysClock != SYSTICK_SYS_CLOCK_DIV_2)
+    {
+        /*  选择SCLK作为时钟 */
+        SFR_SET_BIT_ASM(ST_CTL, ST_CTL_STCLKS_POS);
+ 624:	03 45       	LD        R5, [PC + #3]         ;->0x630  :=0x402000a0
+..\src\kf32a1x6_systick.c:141
+{
+    /* 参数校验 */
+    CHECK_RESTRICTION(CHECK_SYSTICK_CLOCK(SysClock));
+
+    /*---------------- 设置ST_CTL寄存器STCLKS位 ----------------*/
+    if (SysClock != SYSTICK_SYS_CLOCK_DIV_2)
+ 626:	00 38       	CMP       R0, #0
+ 628:	06 f1       	JNZ       $+6                   ;->0x634
+..\src\kf32a1x6_systick.c:149
+        SFR_SET_BIT_ASM(ST_CTL, ST_CTL_STCLKS_POS);
+    }
+    else
+    {
+        /*  选择SCLK/2作为时钟 */
+        SFR_CLR_BIT_ASM(ST_CTL, ST_CTL_STCLKS_POS);
+ 62a:	2a 4e       	CLR       [R5], #2
+..\src\kf32a1x6_systick.c:151
+    }
+}
+ 62c:	1d 5c       	JMP       LR
+ 62e:	00 00       	NOP      NOP      
+ 630:	a0 00 20 40 	.long     0x402000a0 ->1075839136 
+..\src\kf32a1x6_systick.c:144
+
+    /*---------------- 设置ST_CTL寄存器STCLKS位 ----------------*/
+    if (SysClock != SYSTICK_SYS_CLOCK_DIV_2)
+    {
+        /*  选择SCLK作为时钟 */
+        SFR_SET_BIT_ASM(ST_CTL, ST_CTL_STCLKS_POS);
+ 634:	2a 4c       	SET       [R5], #2
+..\src\kf32a1x6_systick.c:151
+    else
+    {
+        /*  选择SCLK/2作为时钟 */
+        SFR_CLR_BIT_ASM(ST_CTL, ST_CTL_STCLKS_POS);
+    }
+}
+ 636:	1d 5c       	JMP       LR
+
+00000638 <startup>:
+startup():
+..\_config\startup.c:22
+//####################################################################//
+int main(void);
+int startup(void);
+//####################################################################//
+int startup(void)
+{
+ 638:	2d 5d       	PUSH      LR
+..\_config\startup.c:31
+#ifdef  Project_Type__cplusplus
+	void (*pf)(void);
+#endif
+//############# 		init work for the chip 		    #############//
+//	HWREG(0x40000000)=1;
+	HWREG(0x40000000)=0;	// cppcheck-suppress misra-c2012-11.4
+ 63a:	40 10       	MOV       R4, #0
+ 63c:	51 10       	MOV       R5, #1
+ 63e:	ae 7b       	LSL       R5, #30
+ 640:	54 85       	ST.W      [R5], R4
+..\_config\startup.c:36
+//############# init variable who have initialization	#############//
+	s = (unsigned int*)&__text_end__;		
+	begin = (unsigned int*)&__data_start__;
+	end = (unsigned int*)&__data_end__;
+	while( begin <  end) {	// cppcheck-suppress comparePointers
+ 642:	12 45       	LD        R5, [PC + #18]        ;->0x688  :=0x10000000
+ 644:	12 44       	LD        R4, [PC + #18]        ;->0x68c  :=0x10000000
+ 646:	45 70       	CMP       R4, R5
+ 648:	0d f9       	JLS       $+13                  ;->0x662
+ 64a:	12 44       	LD        R4, [PC + #18]        ;->0x690  :=0xb28
+..\_config\startup.c:21
+#endif
+//####################################################################//
+int main(void);
+int startup(void);
+//####################################################################//
+int startup(void)
+ 64c:	12 43       	LD        R3, [PC + #18]        ;->0x694  :=0x10000004
+ 64e:	13 42       	LD        R2, [PC + #19]        ;->0x698  :=0x10000003
+ 650:	d2 c6       	SUB       R2, R2, R3
+ 652:	12 7c       	LSR       R2, #2
+ 654:	52 c0       	ADD       R2, R2, #1
+ 656:	12 7a       	LSL       R2, #2
+ 658:	52 c3       	ADD       R2, R2, R5
+..\_config\startup.c:37
+//############# init variable who have initialization	#############//
+	s = (unsigned int*)&__text_end__;		
+	begin = (unsigned int*)&__data_start__;
+	end = (unsigned int*)&__data_end__;
+	while( begin <  end) {	// cppcheck-suppress comparePointers
+		*begin = *s;
+ 65a:	34 72       	LD.W      R3, [R4++]
+ 65c:	53 73       	ST.W      [R5++], R3
+..\_config\startup.c:36
+	HWREG(0x40000000)=0;	// cppcheck-suppress misra-c2012-11.4
+//############# init variable who have initialization	#############//
+	s = (unsigned int*)&__text_end__;		
+	begin = (unsigned int*)&__data_start__;
+	end = (unsigned int*)&__data_end__;
+	while( begin <  end) {	// cppcheck-suppress comparePointers
+ 65e:	52 70       	CMP       R5, R2
+ 660:	fd f1       	JNZ       $-3                   ;->0x65a
+..\_config\startup.c:54
+#endif		
+//############# init variable who have no initialization	#############//
+#if 1	 //  0 not init this type variable
+	begin = (unsigned int*)&__bss_start__;
+	end = (unsigned int*)&__bss_end__;
+	while( begin < end ){	// cppcheck-suppress comparePointers
+ 662:	0f 45       	LD        R5, [PC + #15]        ;->0x69c  :=0x10000000
+ 664:	0f 44       	LD        R4, [PC + #15]        ;->0x6a0  :=0x10000008
+ 666:	45 70       	CMP       R4, R5
+ 668:	0c f9       	JLS       $+12                  ;->0x680
+..\_config\startup.c:21
+#endif
+//####################################################################//
+int main(void);
+int startup(void);
+//####################################################################//
+int startup(void)
+ 66a:	0f 44       	LD        R4, [PC + #15]        ;->0x6a4  :=0x10000004
+ 66c:	0f 43       	LD        R3, [PC + #15]        ;->0x6a8  :=0x1000000b
+ 66e:	1b c7       	SUB       R3, R3, R4
+ 670:	1a 7c       	LSR       R3, #2
+ 672:	5b c0       	ADD       R3, R3, #1
+ 674:	1a 7a       	LSL       R3, #2
+ 676:	5b c3       	ADD       R3, R3, R5
+..\_config\startup.c:55
+//############# init variable who have no initialization	#############//
+#if 1	 //  0 not init this type variable
+	begin = (unsigned int*)&__bss_start__;
+	end = (unsigned int*)&__bss_end__;
+	while( begin < end ){	// cppcheck-suppress comparePointers
+		*begin = 0;begin++;
+ 678:	40 10       	MOV       R4, #0
+ 67a:	54 73       	ST.W      [R5++], R4
+..\_config\startup.c:54
+#endif		
+//############# init variable who have no initialization	#############//
+#if 1	 //  0 not init this type variable
+	begin = (unsigned int*)&__bss_start__;
+	end = (unsigned int*)&__bss_end__;
+	while( begin < end ){	// cppcheck-suppress comparePointers
+ 67c:	53 70       	CMP       R5, R3
+ 67e:	fe f1       	JNZ       $-2                   ;->0x67a
+..\_config\startup.c:59
+		*begin = 0;begin++;
+	}
+#endif		
+//############# begin to run main function	#############//		
+	return main();
+ 680:	0b 40       	LD        R0, [PC + #11]        ;->0x6ac  :=0x734
+ 682:	00 5c       	LJMP      R0
+..\_config\startup.c:60
+}
+ 684:	0d 5d       	POP       LR
+ 686:	1d 5c       	JMP       LR
+ 688:	00 00 00 10 	.long     0x10000000 ->268435456  [!!!@2@:NOP      	@@: MOV       R0, #0
+ 68c:	00 00 00 10 	.long     0x10000000 ->268435456  [!!!@2@:NOP      	@@: MOV       R0, #0
+ 690:	28 0b 00 00 	.long     0x00000b28 ->000002856  [!!!@2@:LD.W      R3, [SP + #40]	@@: NOP      
+ 694:	04 00 00 10 	.long     0x10000004 ->268435460 
+ 698:	03 00 00 10 	.long     0x10000003 ->268435459 
+ 69c:	00 00 00 10 	.long     0x10000000 ->268435456  [!!!@2@:NOP      	@@: MOV       R0, #0
+ 6a0:	08 00 00 10 	.long     0x10000008 ->268435464  [!!!@2@:SYNC     	@@: MOV       R0, #0
+ 6a4:	04 00 00 10 	.long     0x10000004 ->268435460 
+ 6a8:	0b 00 00 10 	.long     0x1000000b ->268435467  [!!!@2@:DSI      	@@: MOV       R0, #0
+ 6ac:	34 07 00 00 	.long     0x00000734 ->000001844  [!!!@2@:SJMP      $-204                 ;->0x514	@@: NOP      
+
+000006b0 <_NMI_exception>:
+_NMI_exception():
+..\kf_it.c:22
+//*****************************************************************************************	
+void __attribute__((interrupt)) _NMI_exception (void);
+void __attribute__((interrupt)) _NMI_exception (void)
+{	
+
+}
+ 6b0:	7d 5d       	CLR       PSW, #29
+ 6b2:	1d 5c       	JMP       LR
+
+000006b4 <_HardFault_exception>:
+_HardFault_exception():
+..\kf_it.c:31
+//*****************************************************************************************	
+void __attribute__((interrupt)) _HardFault_exception (void);
+void __attribute__((interrupt)) _HardFault_exception (void)
+{
+
+}
+ 6b4:	7d 5d       	CLR       PSW, #29
+ 6b6:	1d 5c       	JMP       LR
+
+000006b8 <_StackFault_exception>:
+_StackFault_exception():
+..\kf_it.c:40
+//*****************************************************************************************	
+void __attribute__((interrupt)) _StackFault_exception (void);
+void __attribute__((interrupt)) _StackFault_exception (void)
+{
+
+}
+ 6b8:	7d 5d       	CLR       PSW, #29
+ 6ba:	1d 5c       	JMP       LR
+
+000006bc <_AriFault_exception>:
+_AriFault_exception():
+..\kf_it.c:49
+//*****************************************************************************************	
+void __attribute__((interrupt)) _AriFault_exception (void);
+void __attribute__((interrupt)) _AriFault_exception (void)
+{
+
+}
+ 6bc:	7d 5d       	CLR       PSW, #29
+ 6be:	1d 5c       	JMP       LR
+
+000006c0 <_SVC_exception>:
+_SVC_exception():
+..\kf_it.c:58
+//*****************************************************************************************	
+void __attribute__((interrupt)) _SVC_exception (void);
+void __attribute__((interrupt)) _SVC_exception (void)
+{
+
+}
+ 6c0:	7d 5d       	CLR       PSW, #29
+ 6c2:	1d 5c       	JMP       LR
+
+000006c4 <_SoftSV_exception>:
+_SoftSV_exception():
+..\kf_it.c:67
+//*****************************************************************************************	
+void __attribute__((interrupt)) _SoftSV_exception (void);
+void __attribute__((interrupt)) _SoftSV_exception (void)
+{
+
+}
+ 6c4:	7d 5d       	CLR       PSW, #29
+ 6c6:	1d 5c       	JMP       LR
+
+000006c8 <_SysTick_exception>:
+_SysTick_exception():
+..\kf_it.c:76
+//*****************************************************************************************	
+void __attribute__((interrupt)) _SysTick_exception (void);
+void __attribute__((interrupt)) _SysTick_exception (void)
+{
+	
+}
+ 6c8:	7d 5d       	CLR       PSW, #29
+ 6ca:	1d 5c       	JMP       LR
+
+000006cc <BoardGpioInit>:
+BoardGpioInit():
+..\main.c:15
+//#include<KF32A156MQV.h>
+#include "system_init.h"
+//asm(".include		\"KF32A156MQV.inc\"	");	 
+static volatile uint32_t TimingDelay;
+void BoardGpioInit(void)
+{
+ 6cc:	87 5f       	PUSH      {R6-R8,LR}
+ 6ce:	e8 31       	SUB       SP, #24
+..\main.c:19
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	/* Configure PD12 LED1 output */
+	GPIO_InitStructure.m_Mode = GPIO_MODE_OUT;
+ 6d0:	61 10       	MOV       R6, #1
+ 6d2:	01 26       	ST.W      [SP + #1], R6
+..\main.c:20
+	GPIO_InitStructure.m_OpenDrain = GPIO_POD_PP;
+ 6d4:	50 10       	MOV       R5, #0
+ 6d6:	03 25       	ST.W      [SP + #3], R5
+..\main.c:21
+	GPIO_InitStructure.m_PullDown = GPIO_NOPULL;
+ 6d8:	05 25       	ST.W      [SP + #5], R5
+..\main.c:22
+	GPIO_InitStructure.m_PullUp = GPIO_NOPULL;
+ 6da:	04 25       	ST.W      [SP + #4], R5
+..\main.c:23
+	GPIO_InitStructure.m_Speed = GPIO_LOW_SPEED;
+ 6dc:	02 25       	ST.W      [SP + #2], R5
+..\main.c:24
+	GPIO_InitStructure.m_Pin = GPIO_PIN_MASK_12;
+ 6de:	71 10       	MOV       R7, #1
+ 6e0:	bc 7a       	LSL       R7, #12
+ 6e2:	e7 85       	ST.W      [SP], R7
+..\main.c:25
+	GPIO_Configuration(GPIOD_SFR , &GPIO_InitStructure);
+ 6e4:	08 45       	LD        R5, [PC + #8]         ;->0x704  :=0x500000c0
+ 6e6:	05 59       	MOV       R8, R5
+ 6e8:	05 58       	MOV       R0, R5
+ 6ea:	2e 58       	MOV       R1, SP
+ 6ec:	07 45       	LD        R5, [PC + #7]         ;->0x708  :=0x200
+ 6ee:	05 5c       	LJMP      R5
+..\main.c:28
+
+	//将PD12输出为高电平  前提是PD12已经配置为输出口
+	GPIO_Set_Output_Data_Bits(GPIOD_SFR, GPIO_PIN_MASK_12, Bit_SET);
+ 6f0:	08 58       	MOV       R0, R8
+ 6f2:	27 58       	MOV       R1, R7
+ 6f4:	46 58       	MOV       R2, R6
+ 6f6:	06 45       	LD        R5, [PC + #6]         ;->0x70c  :=0x2ba
+ 6f8:	05 5c       	LJMP      R5
+..\main.c:48
+//	GPIO_Set_Output_Data_Bits (GPIOD_SFR,GPIO_PIN_MASK_12, Bit_SET);
+//	//将PD12输出为低电平  前提是PD12已经配置为输出口
+//	GPIO_Set_Output_Data_Bits (GPIOD_SFR,GPIO_PIN_MASK_12, Bit_RESET);
+//	//将PD12输出电平取反  前提是PD12已经配置为输出口
+//	 GPIO_Toggle_Output_Data_Config (GPIOD_SFR,GPIO_PIN_MASK_12);
+}
+ 6fa:	e8 29       	ADD       SP, #24
+ 6fc:	07 5e       	POP       {R6-R8}
+ 6fe:	0d 5d       	POP       LR
+ 700:	1d 5c       	JMP       LR
+ 702:	00 00       	NOP      NOP      
+ 704:	c0 00 00 50 	.long     0x500000c0 ->1342177472 
+ 708:	00 02 00 00 	.long     0x00000200 ->000000512  [!!!@2@:SVC      	@@: NOP      
+ 70c:	ba 02 00 00 	.long     0x000002ba ->000000698  [!!!@2@:SVC      	@@: NOP      
+
+00000710 <BoardUserKeyInit>:
+BoardUserKeyInit():
+..\main.c:51
+
+void BoardUserKeyInit(void)
+{
+ 710:	2d 5d       	PUSH      LR
+ 712:	e4 31       	SUB       SP, #20
+..\main.c:56
+	GPIO_InitTypeDef GPIO_InitStructure;
+	EINT_InitTypeDef EINT_InitStructure;
+
+	/* Configure the external interrupt */
+	EINT_InitStructure.m_Fall = TRUE;
+ 714:	51 10       	MOV       R5, #1
+ 716:	03 25       	ST.W      [SP + #3], R5
+..\main.c:57
+	EINT_InitStructure.m_Line = INT_EXTERNAL_INTERRUPT_0;
+ 718:	40 10       	MOV       R4, #0
+ 71a:	e4 85       	ST.W      [SP], R4
+..\main.c:58
+	EINT_InitStructure.m_Mask = TRUE;
+ 71c:	01 25       	ST.W      [SP + #1], R5
+..\main.c:59
+	EINT_InitStructure.m_Rise = TRUE;
+ 71e:	02 25       	ST.W      [SP + #2], R5
+..\main.c:60
+	EINT_InitStructure.m_Source = INT_EXTERNAL_SOURCE_PC;
+ 720:	52 10       	MOV       R5, #2
+ 722:	04 25       	ST.W      [SP + #4], R5
+..\main.c:61
+	INT_External_Configuration(&EINT_InitStructure);
+ 724:	0e 58       	MOV       R0, SP
+ 726:	03 45       	LD        R5, [PC + #3]         ;->0x730  :=0x3f8
+ 728:	05 5c       	LJMP      R5
+..\main.c:62
+}
+ 72a:	e4 29       	ADD       SP, #20
+ 72c:	0d 5d       	POP       LR
+ 72e:	1d 5c       	JMP       LR
+ 730:	f8 03 00 00 	.long     0x000003f8 ->000001016  [!!!@4@:JMP       $-524288              ;->0xfff00730
+
+00000734 <main>:
+main():
+..\main.c:66
+
+//Main Function
+int main()
+{
+ 734:	9f 5f       	PUSH      {R6-R10,LR}
+..\main.c:69
+	/*initialize system clock *********/
+	/* Initialize the system clock is 120M*/
+	SystemInit(120);
+ 736:	08 17       	MOV       R0, #120
+ 738:	16 45       	LD        R5, [PC + #22]        ;->0x790  :=0x7c0
+ 73a:	05 5c       	LJMP      R5
+..\main.c:71
+	/* Setup SysTick Timer as delay function, and input frequency is 120M */
+	systick_delay_init(120);
+ 73c:	08 17       	MOV       R0, #120
+ 73e:	16 45       	LD        R5, [PC + #22]        ;->0x794  :=0x980
+ 740:	05 5c       	LJMP      R5
+..\main.c:73
+	/* Initialize the LED IOs */
+	BoardGpioInit();
+ 742:	16 45       	LD        R5, [PC + #22]        ;->0x798  :=0x6cc
+ 744:	05 5c       	LJMP      R5
+..\main.c:75
+	/* Configure PC0 in interrupt mode */
+	BoardUserKeyInit();
+ 746:	16 45       	LD        R5, [PC + #22]        ;->0x79c  :=0x710
+ 748:	05 5c       	LJMP      R5
+..\main.c:77
+	 /* Enable and set EXTI0 Interrupt to the lowest priority */
+	INT_Interrupt_Enable(INT_EINT0, TRUE);
+ 74a:	02 11       	MOV       R0, #18
+ 74c:	11 10       	MOV       R1, #1
+ 74e:	15 45       	LD        R5, [PC + #21]        ;->0x7a0  :=0x304
+ 750:	05 5c       	LJMP      R5
+..\main.c:78
+	INT_Interrupt_Priority_Config(INT_EINT0, 7, 1);
+ 752:	02 11       	MOV       R0, #18
+ 754:	17 10       	MOV       R1, #7
+ 756:	21 10       	MOV       R2, #1
+ 758:	13 45       	LD        R5, [PC + #19]        ;->0x7a4  :=0x360
+ 75a:	05 5c       	LJMP      R5
+..\main.c:80
+	/* Configure interrupt priority group, default is 3VS1 */
+	INT_Priority_Group_Config(INT_PRIORITY_GROUP_3VS1);
+ 75c:	00 10       	MOV       R0, #0
+ 75e:	13 45       	LD        R5, [PC + #19]        ;->0x7a8  :=0x2dc
+ 760:	05 5c       	LJMP      R5
+..\main.c:82
+	/* Enable the global interrupt */
+	INT_All_Enable(TRUE);
+ 762:	01 10       	MOV       R0, #1
+ 764:	12 45       	LD        R5, [PC + #18]        ;->0x7ac  :=0x2f0
+ 766:	05 5c       	LJMP      R5
+ 768:	12 46       	LD        R6, [PC + #18]        ;->0x7b0  :=0x10000000
+ 76a:	13 45       	LD        R5, [PC + #19]        ;->0x7b4  :=0x2d0
+ 76c:	45 59       	MOV       R10, R5
+ 76e:	13 47       	LD        R7, [PC + #19]        ;->0x7b8  :=0x9c8
+..\main.c:93
+//		GPIO_Set_Output_Data_Bits(GPIOD_SFR, GPIO_PIN_MASK_12, Bit_RESET);
+//		systick_delay_ms(500);
+
+//		/* Toggle LED1 */
+		/* Turn ON/OFF the LED1 every 500ms */
+		if (++TimingDelay >= 10)
+ 770:	26 59       	MOV       R9, R6
+..\main.c:95
+		{
+			TimingDelay = 0;
+ 772:	80 10       	MOV       R8, #0
+ 774:	03 04       	SJMP      $+3                   ;->0x77a
+..\main.c:98
+			GPIO_Toggle_Output_Data_Config(GPIOD_SFR, GPIO_PIN_MASK_12);
+		}
+		systick_delay_ms(50);
+ 776:	02 13       	MOV       R0, #50
+ 778:	07 5c       	LJMP      R7
+..\main.c:93
+//		GPIO_Set_Output_Data_Bits(GPIOD_SFR, GPIO_PIN_MASK_12, Bit_RESET);
+//		systick_delay_ms(500);
+
+//		/* Toggle LED1 */
+		/* Turn ON/OFF the LED1 every 500ms */
+		if (++TimingDelay >= 10)
+ 77a:	56 82       	LD.W      R5, [R6]
+ 77c:	6d c0       	ADD       R5, R5, #1
+ 77e:	65 85       	ST.W      [R6], R5
+ 780:	59 38       	CMP       R5, #9
+ 782:	fa f9       	JLS       $-6                   ;->0x776
+..\main.c:95
+		{
+			TimingDelay = 0;
+ 784:	98 85       	ST.W      [R9], R8
+..\main.c:96
+			GPIO_Toggle_Output_Data_Config(GPIOD_SFR, GPIO_PIN_MASK_12);
+ 786:	0e 40       	LD        R0, [PC + #14]        ;->0x7bc  :=0x500000c0
+ 788:	11 10       	MOV       R1, #1
+ 78a:	8c 7a       	LSL       R1, #12
+ 78c:	0a 5c       	LJMP      R10
+ 78e:	f4 07       	SJMP      $-12                  ;->0x776
+ 790:	c0 07 00 00 	.long     0x000007c0 ->000001984  [!!!@2@:SJMP      $-64                  ;->0x710	@@: NOP      
+ 794:	80 09 00 00 	.long     0x00000980 ->000002432  [!!!@2@:LD.W      R1, [SP + #128]	@@: NOP      
+ 798:	cc 06 00 00 	.long     0x000006cc ->000001740  [!!!@2@:SJMP      $-308                 ;->0x530	@@: NOP      
+ 79c:	10 07 00 00 	.long     0x00000710 ->000001808  [!!!@2@:SJMP      $-240                 ;->0x5bc	@@: NOP      
+ 7a0:	04 03 00 00 	.long     0x00000304 ->000000772  [!!!@4@:JMP       $+262144              ;->0x807a0
+ 7a4:	60 03 00 00 	.long     0x00000360 ->000000864  [!!!@4@:JMP       $+6291456             ;->0xc007a4
+ 7a8:	dc 02 00 00 	.long     0x000002dc ->000000732  [!!!@2@:SVC      	@@: NOP      
+ 7ac:	f0 02 00 00 	.long     0x000002f0 ->000000752  [!!!@2@:SVC      	@@: NOP      
+ 7b0:	00 00 00 10 	.long     0x10000000 ->268435456  [!!!@2@:NOP      	@@: MOV       R0, #0
+ 7b4:	d0 02 00 00 	.long     0x000002d0 ->000000720  [!!!@2@:SVC      	@@: NOP      
+ 7b8:	c8 09 00 00 	.long     0x000009c8 ->000002504  [!!!@2@:LD.W      R1, [SP + #200]	@@: NOP      
+ 7bc:	c0 00 00 50 	.long     0x500000c0 ->1342177472 
+
+000007c0 <SystemInit>:
+SystemInit():
+..\system_init.c:262
+ *  @param in :SCLK_Value System master clock frequency,MHZ
+ *  @param out :None
+ *  @retval :None
+ */
+void SystemInit(uint8_t SCLK_Value)
+{
+ 7c0:	9f 5f       	PUSH      {R6-R10,LR}
+ 7c2:	e4 30       	SUB       SP, #4
+ 7c4:	90 d1       	ZXT.B     R9, R0
+..\system_init.c:113
+ * ******************************************************************************
+ * 	Enable INTHF & INTLF,and set the INTHF as the SCLK.
+ * 	Wait till INTHF is ready and if Time out is reached exit.
+ * ******************************************************************************
+ */
+	OSC_INTLF_Software_Enable(TRUE);
+ 7c6:	01 10       	MOV       R0, #1
+ 7c8:	4b 45       	LD        R5, [PC + #75]        ;->0x8f4  :=0x5d0
+ 7ca:	05 5c       	LJMP      R5
+..\system_init.c:114
+	OSC_INTHF_Software_Enable(TRUE);
+ 7cc:	01 10       	MOV       R0, #1
+ 7ce:	4b 45       	LD        R5, [PC + #75]        ;->0x8f8  :=0x5bc
+ 7d0:	05 5c       	LJMP      R5
+..\system_init.c:115
+	FLASH_CFG = 0xC7;                        
+ 7d2:	47 1c       	MOV       R4, #199
+ 7d4:	4a 45       	LD        R5, [PC + #74]        ;->0x8fc  :=0x40200100
+ 7d6:	6c a1       	ST.W      [R5 + #5], R4
+..\system_init.c:117
+	/* Set the INTHF as the SCLK DIV<1:1> */
+	OSC_SCK_Division_Config(SCLK_DIVISION_1); 
+ 7d8:	00 10       	MOV       R0, #0
+ 7da:	4a 45       	LD        R5, [PC + #74]        ;->0x900  :=0x48c
+ 7dc:	05 59       	MOV       R8, R5
+ 7de:	05 5c       	LJMP      R5
+..\system_init.c:118
+	OSC_SCK_Source_Config(SCLK_SOURCE_INTHF);
+ 7e0:	00 10       	MOV       R0, #0
+ 7e2:	49 47       	LD        R7, [PC + #73]        ;->0x904  :=0x4fc
+ 7e4:	07 5c       	LJMP      R7
+..\system_init.c:119
+	StartUpCounter = HSI_STARTUP_TIMEOUT;
+ 7e6:	50 17       	MOV       R5, #112
+ 7e8:	e5 85       	ST.W      [SP], R5
+..\system_init.c:120
+	while (--StartUpCounter);
+ 7ea:	5e 82       	LD.W      R5, [SP]
+ 7ec:	6d cc       	SUB       R5, R5, #1
+ 7ee:	e5 85       	ST.W      [SP], R5
+ 7f0:	50 38       	CMP       R5, #0
+ 7f2:	fc f1       	JNZ       $-4                   ;->0x7ea
+ 7f4:	45 46       	LD        R6, [PC + #69]        ;->0x908  :=0x600
+..\system_init.c:121
+	while (OSC_Get_INTHF_INT_Flag() != SET);
+ 7f6:	06 5c       	LJMP      R6
+ 7f8:	01 38       	CMP       R0, #1
+ 7fa:	fe f1       	JNZ       $-2                   ;->0x7f6
+..\system_init.c:134
+ */
+#ifdef SYSCLK_FREQ_HSI
+	OSC_PLL_Input_Source_Config(PLL_INPUT_INTHF);
+#else
+	/* Config the BKP area is enable, BKP register and data can be write and read,and enable EXTHF pins */
+	SFR_SET_BIT_ASM(OSC_CTL0, OSC_CTL0_PMWREN_POS);
+ 7fc:	51 10       	MOV       R5, #1
+ 7fe:	ae 7b       	LSL       R5, #30
+ 800:	28 4c       	SET       [R5], #0
+..\system_init.c:135
+	SFR_SET_BIT_ASM(PM_CTL0, PM_CTL0_BKPREGCLR_POS);
+ 802:	43 45       	LD        R5, [PC + #67]        ;->0x90c  :=0x40001580
+ 804:	2e 4d       	SET       [R5], #22
+..\system_init.c:136
+	SFR_SET_BIT_ASM(PM_CTL0, PM_CTL0_BKPWR_POS);
+ 806:	2f 4c       	SET       [R5], #7
+..\system_init.c:137
+    SFR_CLR_BIT_ASM(PM_CAL1, PM_CAL1_HSE_SEL_POS);
+ 808:	42 45       	LD        R5, [PC + #66]        ;->0x910  :=0x4000159c
+ 80a:	af 4e       	CLR       [R5], #15
+..\system_init.c:142
+	/* If an external clock frequency is more than 20M, should be set the HSFSEN bit 
+	   in OSC_HFOSCCAL1 register */
+	#if (SYSCLK_FREQ_HSE < 20000000)
+	{
+		SFR_SET_BIT_ASM(OSC_HFOSCCAL1, OSC_HFOSCCAL1_HLSW_POS);
+ 80c:	42 45       	LD        R5, [PC + #66]        ;->0x914  :=0x40000014
+ 80e:	28 4c       	SET       [R5], #0
+..\system_init.c:162
+		while(OSC_Get_EXTHF_INT_Flag() != SET);
+		OSC_SCK_Source_Config(SCLK_SOURCE_EXTHF);
+		OSC_PLL_Input_Source_Config(PLL_INPUT_EXTHF);
+#else
+	/* External oscillator default working  in fast startup mode */
+	GPIO_Write_Mode_Bits(GPIOH_SFR, GPIO_PIN_MASK_11, GPIO_MODE_OUT);
+ 810:	42 40       	LD        R0, [PC + #66]        ;->0x918  :=0x500001c0
+ 812:	11 10       	MOV       R1, #1
+ 814:	8b 7a       	LSL       R1, #11
+ 816:	21 10       	MOV       R2, #1
+ 818:	41 45       	LD        R5, [PC + #65]        ;->0x91c  :=0x28e
+ 81a:	45 59       	MOV       R10, R5
+ 81c:	05 5c       	LJMP      R5
+..\system_init.c:163
+	GPIO_Set_Output_Data_Bits(GPIOH_SFR, GPIO_PIN_MASK_11, Bit_RESET);
+ 81e:	3f 40       	LD        R0, [PC + #63]        ;->0x918  :=0x500001c0
+ 820:	11 10       	MOV       R1, #1
+ 822:	8b 7a       	LSL       R1, #11
+ 824:	20 10       	MOV       R2, #0
+ 826:	3f 45       	LD        R5, [PC + #63]        ;->0x920  :=0x2ba
+ 828:	05 5c       	LJMP      R5
+..\system_init.c:164
+	StartUpCounter = HSE_FASTSTARTUP_TIMEOUT;
+ 82a:	50 17       	MOV       R5, #112
+ 82c:	e5 85       	ST.W      [SP], R5
+..\system_init.c:165
+	while (--StartUpCounter);
+ 82e:	6e 82       	LD.W      R6, [SP]
+ 830:	76 cc       	SUB       R6, R6, #1
+ 832:	e6 85       	ST.W      [SP], R6
+ 834:	60 38       	CMP       R6, #0
+ 836:	fc f1       	JNZ       $-4                   ;->0x82e
+..\system_init.c:166
+	GPIO_Write_Mode_Bits(GPIOH_SFR, GPIO_PIN_MASK_11, GPIO_MODE_AN);
+ 838:	38 40       	LD        R0, [PC + #56]        ;->0x918  :=0x500001c0
+ 83a:	11 10       	MOV       R1, #1
+ 83c:	8b 7a       	LSL       R1, #11
+ 83e:	23 10       	MOV       R2, #3
+ 840:	0a 5c       	LJMP      R10
+..\system_init.c:168
+	/* Must be wait till EXTHF is ready and if Time out is reached exit */
+	OSC_EXTHF_Software_Enable(TRUE);         
+ 842:	01 10       	MOV       R0, #1
+ 844:	38 45       	LD        R5, [PC + #56]        ;->0x924  :=0x5a8
+ 846:	05 5c       	LJMP      R5
+..\system_init.c:169
+	OSC_EXTHF_Start_Delay_Config(EXT_START_DELAY_256);
+ 848:	06 58       	MOV       R0, R6
+ 84a:	38 45       	LD        R5, [PC + #56]        ;->0x928  :=0x57c
+ 84c:	05 5c       	LJMP      R5
+..\system_init.c:170
+	StartUpCounter = HSE_STARTUP_TIMEOUT;
+ 84e:	38 45       	LD        R5, [PC + #56]        ;->0x92c  :=0xa39
+ 850:	e5 85       	ST.W      [SP], R5
+..\system_init.c:171
+	while (StartUpCounter--);    
+ 852:	5e 82       	LD.W      R5, [SP]
+ 854:	65 cc       	SUB       R4, R5, #1
+ 856:	e4 85       	ST.W      [SP], R4
+ 858:	50 38       	CMP       R5, #0
+ 85a:	fc f1       	JNZ       $-4                   ;->0x852
+ 85c:	35 45       	LD        R5, [PC + #53]        ;->0x930  :=0x5f2
+ 85e:	45 59       	MOV       R10, R5
+..\system_init.c:172
+	while(OSC_Get_EXTHF_INT_Flag() != SET);	
+ 860:	0a 5c       	LJMP      R10
+ 862:	c0 58       	MOV       R6, R0
+ 864:	01 38       	CMP       R0, #1
+ 866:	fd f1       	JNZ       $-3                   ;->0x860
+..\system_init.c:173
+	OSC_SCK_Source_Config(SCLK_SOURCE_EXTHF);
+ 868:	02 10       	MOV       R0, #2
+ 86a:	07 5c       	LJMP      R7
+..\system_init.c:174
+	OSC_PLL_Input_Source_Config(PLL_INPUT_EXTHF);
+ 86c:	06 58       	MOV       R0, R6
+ 86e:	32 45       	LD        R5, [PC + #50]        ;->0x934  :=0x4a4
+ 870:	05 5c       	LJMP      R5
+..\system_init.c:186
+ * Enable HFCLK and if EXTHF is invalid configure the HFCLK default clock source 
+ * is HSI.
+ * Enable LFCLK and if configure the LFCLK default clock source is LSI.
+ * ******************************************************************************
+ */
+if((SCLK_Value >= 25) && (SCLK_Value <= 120))
+ 872:	a9 58       	MOV       R5, R9
+ 874:	59 31       	SUB       R5, #25
+ 876:	45 d1       	ZXT.B     R4, R5
+ 878:	4f 3d       	CMP       R4, #95
+ 87a:	21 f8       	JHI       $+33                  ;->0x8bc
+..\system_init.c:188
+{
+	OSC_PLL_Multiple_Value_Select(PLL_Value_Select[SCLK_Value-25][0],	\
+ 87c:	2f 43       	LD        R3, [PC + #47]        ;->0x938  :=0xa04
+ 87e:	43 10       	MOV       R4, #3
+ 880:	2d cb       	MULS      R5, R5, R4
+ 882:	00 00       	NOP      NOP      
+ 884:	63 c3       	ADD       R4, R3, R5
+ 886:	43 e5       	LD.B      R0, [R3 + R5]
+ 888:	4c 88       	LD.B      R1, [R4 + #1]
+ 88a:	94 88       	LD.B      R2, [R4 + #2]
+ 88c:	2c 45       	LD        R5, [PC + #44]        ;->0x93c  :=0x510
+ 88e:	05 5c       	LJMP      R5
+..\system_init.c:197
+	OSC_PLL_Start_Delay_Config(PLL_START_DELAY_8192);
+#else
+	#if (SYSCLK_FREQ_HSE <= 8000000)
+		OSC_PLL_Start_Delay_Config(PLL_START_DELAY_4096);
+	#elif (SYSCLK_FREQ_HSE <= 16000000)
+		OSC_PLL_Start_Delay_Config(PLL_START_DELAY_8192);
+ 890:	07 10       	MOV       R0, #7
+ 892:	2c 45       	LD        R5, [PC + #44]        ;->0x940  :=0x564
+ 894:	05 5c       	LJMP      R5
+..\system_init.c:202
+	#else
+		OSC_PLL_Start_Delay_Config(PLL_START_DELAY_16384);
+	#endif
+#endif
+	OSC_PLL_Software_Enable(TRUE);
+ 896:	06 58       	MOV       R0, R6
+ 898:	2b 45       	LD        R5, [PC + #43]        ;->0x944  :=0x594
+ 89a:	05 5c       	LJMP      R5
+..\system_init.c:203
+	OSC_PLL_RST(); 
+ 89c:	2b 45       	LD        R5, [PC + #43]        ;->0x948  :=0x558
+ 89e:	05 5c       	LJMP      R5
+ 8a0:	2b 46       	LD        R6, [PC + #43]        ;->0x94c  :=0x5e4
+..\system_init.c:204
+	while (OSC_Get_PLL_INT_Flag() != SET);
+ 8a2:	06 5c       	LJMP      R6
+ 8a4:	01 38       	CMP       R0, #1
+ 8a6:	fe f1       	JNZ       $-2                   ;->0x8a2
+..\system_init.c:205
+	if(SCLK_Value <= 48)
+ 8a8:	90 3b       	CMP       R9, #48
+ 8aa:	5f f8       	JHI       $+95                  ;->0x968
+..\system_init.c:206
+		FLASH_CFG = 0xC2;
+ 8ac:	42 1c       	MOV       R4, #194
+ 8ae:	14 45       	LD        R5, [PC + #20]        ;->0x8fc  :=0x40200100
+ 8b0:	6c a1       	ST.W      [R5 + #5], R4
+..\system_init.c:212
+	else if(SCLK_Value <= 96)
+		FLASH_CFG = 0xC4;
+	else if(SCLK_Value <= 120)
+		FLASH_CFG = 0xC5;
+	/* Configure the System clock source is PLL */
+	OSC_SCK_Division_Config(SCLK_DIVISION_1);
+ 8b2:	00 10       	MOV       R0, #0
+ 8b4:	08 5c       	LJMP      R8
+..\system_init.c:213
+	OSC_SCK_Source_Config(SCLK_SOURCE_PLL);
+ 8b6:	04 10       	MOV       R0, #4
+ 8b8:	07 5c       	LJMP      R7
+ 8ba:	06 04       	SJMP      $+6                   ;->0x8c6
+..\system_init.c:217
+}
+else
+{
+	OSC_SCK_Division_Config(SCLK_DIVISION_1);
+ 8bc:	00 10       	MOV       R0, #0
+ 8be:	08 5c       	LJMP      R8
+..\system_init.c:221
+#ifdef SYSCLK_FREQ_HSI
+	OSC_SCK_Source_Config(SCLK_SOURCE_INTHF);
+#else
+	OSC_SCK_Source_Config(SCLK_SOURCE_EXTHF);
+ 8c0:	02 10       	MOV       R0, #2
+ 8c2:	11 45       	LD        R5, [PC + #17]        ;->0x904  :=0x4fc
+ 8c4:	05 5c       	LJMP      R5
+..\system_init.c:225
+#endif
+}
+	/* Enable HFCLK and if EXTHF is invalid configure the HFCLK default clock source is HSI DIV<1:1> */
+	OSC_HFCK_Division_Config(HFCK_DIVISION_1);
+ 8c6:	00 10       	MOV       R0, #0
+ 8c8:	22 45       	LD        R5, [PC + #34]        ;->0x950  :=0x474
+ 8ca:	05 5c       	LJMP      R5
+..\system_init.c:229
+#ifdef SYSCLK_FREQ_HSI
+	OSC_HFCK_Source_Config(HFCK_SOURCE_INTHF);
+#else
+	OSC_HFCK_Source_Config(HFCK_SOURCE_EXTHF);
+ 8cc:	02 10       	MOV       R0, #2
+ 8ce:	22 45       	LD        R5, [PC + #34]        ;->0x954  :=0x4b4
+ 8d0:	05 5c       	LJMP      R5
+..\system_init.c:231
+#endif
+	OSC_HFCK_Enable(TRUE);
+ 8d2:	01 10       	MOV       R0, #1
+ 8d4:	21 45       	LD        R5, [PC + #33]        ;->0x958  :=0x4cc
+ 8d6:	05 5c       	LJMP      R5
+..\system_init.c:234
+#ifdef SYSCLK_FREQ_INTLF
+	/* Enable LFCLK and if configure the LFCLK default clock source is LSI DIV<1:1> */
+	OSC_LFCK_Division_Config(LFCK_DIVISION_1);
+ 8d8:	00 10       	MOV       R0, #0
+ 8da:	21 45       	LD        R5, [PC + #33]        ;->0x95c  :=0x45c
+ 8dc:	05 5c       	LJMP      R5
+..\system_init.c:235
+	OSC_LFCK_Source_Config(LFCK_INPUT_INTLF);
+ 8de:	00 10       	MOV       R0, #0
+ 8e0:	20 45       	LD        R5, [PC + #32]        ;->0x960  :=0x4dc
+ 8e2:	05 5c       	LJMP      R5
+..\system_init.c:236
+	OSC_LFCK_Enable(TRUE);
+ 8e4:	01 10       	MOV       R0, #1
+ 8e6:	20 45       	LD        R5, [PC + #32]        ;->0x964  :=0x4ec
+ 8e8:	05 5c       	LJMP      R5
+..\system_init.c:273
+// 	#if !defined (SYSCLK_FREQ_HSE)
+// 	CANFD_HFCLK_MHZ = (uint8_t)(SYSCLK_FREQ_HSI/1000000) ;
+// 	#else
+// 	CANFD_HFCLK_MHZ = (uint8_t)(SYSCLK_FREQ_HSE/1000000);
+// 	#endif
+}
+ 8ea:	e4 28       	ADD       SP, #4
+ 8ec:	1f 5e       	POP       {R6-R10}
+ 8ee:	0d 5d       	POP       LR
+ 8f0:	1d 5c       	JMP       LR
+ 8f2:	00 00       	NOP      NOP      
+ 8f4:	d0 05 00 00 	.long     0x000005d0 ->000001488  [!!!@2@:SJMP      $+464                 ;->0xc94	@@: NOP      
+ 8f8:	bc 05 00 00 	.long     0x000005bc ->000001468  [!!!@2@:SJMP      $+444                 ;->0xc70	@@: NOP      
+ 8fc:	00 01 20 40 	.long     0x40200100 ->1075839232  [!!!@2@:CMN       R0, R0	@@: LD        R0, [PC + #32]        ;->0x97c  :=0x40200100
+ 900:	8c 04 00 00 	.long     0x0000048c ->000001164  [!!!@2@:SJMP      $+140                 ;->0xa18	@@: NOP      
+ 904:	fc 04 00 00 	.long     0x000004fc ->000001276  [!!!@2@:SJMP      $+252                 ;->0xafc	@@: NOP      
+ 908:	00 06 00 00 	.long     0x00000600 ->000001536  [!!!@2@:SJMP      $-512                 ;->0x508	@@: NOP      
+ 90c:	80 15 00 40 	.long     0x40001580 ->1073747328  [!!!@2@:MOV       R8, #80	@@: LD        R0, [PC + #0]         ;->0x90c  :=0x40001580
+ 910:	9c 15 00 40 	.long     0x4000159c ->1073747356  [!!!@2@:MOV       R9, #92	@@: LD        R0, [PC + #0]         ;->0x910  :=0x4000159c
+ 914:	14 00 00 40 	.long     0x40000014 ->1073741844 
+ 918:	c0 01 00 50 	.long     0x500001c0 ->1342177728  [!!!@2@:CMN       R12, R0	@@: JB        [R0], #0
+ 91c:	8e 02 00 00 	.long     0x0000028e ->000000654  [!!!@2@:SVC      	@@: NOP      
+ 920:	ba 02 00 00 	.long     0x000002ba ->000000698  [!!!@2@:SVC      	@@: NOP      
+ 924:	a8 05 00 00 	.long     0x000005a8 ->000001448  [!!!@2@:SJMP      $+424                 ;->0xc74	@@: NOP      
+ 928:	7c 05 00 00 	.long     0x0000057c ->000001404  [!!!@2@:SJMP      $+380                 ;->0xc20	@@: NOP      
+ 92c:	39 0a 00 00 	.long     0x00000a39 ->000002617  [!!!@2@:LD.W      R2, [SP + #57]	@@: NOP      
+ 930:	f2 05 00 00 	.long     0x000005f2 ->000001522  [!!!@2@:SJMP      $+498                 ;->0xd14	@@: NOP      
+ 934:	a4 04 00 00 	.long     0x000004a4 ->000001188  [!!!@2@:SJMP      $+164                 ;->0xa7c	@@: NOP      
+ 938:	04 0a 00 00 	.long     0x00000a04 ->000002564  [!!!@2@:LD.W      R2, [SP + #4]	@@: NOP      
+ 93c:	10 05 00 00 	.long     0x00000510 ->000001296  [!!!@2@:SJMP      $+272                 ;->0xb5c	@@: NOP      
+ 940:	64 05 00 00 	.long     0x00000564 ->000001380  [!!!@2@:SJMP      $+356                 ;->0xc08	@@: NOP      
+ 944:	94 05 00 00 	.long     0x00000594 ->000001428  [!!!@2@:SJMP      $+404                 ;->0xc6c	@@: NOP      
+ 948:	58 05 00 00 	.long     0x00000558 ->000001368  [!!!@2@:SJMP      $+344                 ;->0xbf8	@@: NOP      
+ 94c:	e4 05 00 00 	.long     0x000005e4 ->000001508  [!!!@2@:SJMP      $+484                 ;->0xd14	@@: NOP      
+ 950:	74 04 00 00 	.long     0x00000474 ->000001140  [!!!@2@:SJMP      $+116                 ;->0xa38	@@: NOP      
+ 954:	b4 04 00 00 	.long     0x000004b4 ->000001204  [!!!@2@:SJMP      $+180                 ;->0xabc	@@: NOP      
+ 958:	cc 04 00 00 	.long     0x000004cc ->000001228  [!!!@2@:SJMP      $+204                 ;->0xaf0	@@: NOP      
+ 95c:	5c 04 00 00 	.long     0x0000045c ->000001116  [!!!@2@:SJMP      $+92                  ;->0xa14	@@: NOP      
+ 960:	dc 04 00 00 	.long     0x000004dc ->000001244  [!!!@2@:SJMP      $+220                 ;->0xb18	@@: NOP      
+ 964:	ec 04 00 00 	.long     0x000004ec ->000001260  [!!!@2@:SJMP      $+236                 ;->0xb3c	@@: NOP      
+..\system_init.c:207
+	OSC_PLL_Software_Enable(TRUE);
+	OSC_PLL_RST(); 
+	while (OSC_Get_PLL_INT_Flag() != SET);
+	if(SCLK_Value <= 48)
+		FLASH_CFG = 0xC2;
+	else if(SCLK_Value <= 96)
+ 968:	90 3e       	CMP       R9, #96
+ 96a:	05 f8       	JHI       $+5                   ;->0x974
+..\system_init.c:208
+		FLASH_CFG = 0xC4;
+ 96c:	44 1c       	MOV       R4, #196
+ 96e:	04 45       	LD        R5, [PC + #4]         ;->0x97c  :=0x40200100
+ 970:	6c a1       	ST.W      [R5 + #5], R4
+ 972:	a0 07       	SJMP      $-96                  ;->0x8b2
+..\system_init.c:210
+	else if(SCLK_Value <= 120)
+		FLASH_CFG = 0xC5;
+ 974:	45 1c       	MOV       R4, #197
+ 976:	02 45       	LD        R5, [PC + #2]         ;->0x97c  :=0x40200100
+ 978:	6c a1       	ST.W      [R5 + #5], R4
+ 97a:	9c 07       	SJMP      $-100                 ;->0x8b2
+ 97c:	00 01 20 40 	.long     0x40200100 ->1075839232  [!!!@2@:CMN       R0, R0	@@: LD        R0, [PC + #32]        ;->0x9fc  :=0x402000a0
+
+00000980 <systick_delay_init>:
+systick_delay_init():
+..\system_init.c:283
+ *  @param in :SCLK_Value System master clock frequency,MHZ
+ *  @param out :None
+ *  @retval :None
+ */
+void systick_delay_init(uint32_t InputClock)
+{
+ 980:	81 5f       	PUSH      {R6,LR}
+ 982:	c0 58       	MOV       R6, R0
+..\system_init.c:284
+	SYSTICK_Cmd(FALSE);
+ 984:	00 10       	MOV       R0, #0
+ 986:	0b 45       	LD        R5, [PC + #11]        ;->0x9b0  :=0x610
+ 988:	05 5c       	LJMP      R5
+..\system_init.c:285
+	SYSTICK_Clock_Config(SYSTICK_SYS_CLOCK_DIV_2);
+ 98a:	00 10       	MOV       R0, #0
+ 98c:	0a 45       	LD        R5, [PC + #10]        ;->0x9b4  :=0x624
+ 98e:	05 5c       	LJMP      R5
+..\system_init.c:286
+	SFR_CLR_BIT_ASM(ST_CALI, ST_CALII_STCLKREF_POS);
+ 990:	0a 45       	LD        R5, [PC + #10]        ;->0x9b8  :=0x402000ac
+ 992:	af 4f       	CLR       [R5], #31
+..\system_init.c:287
+	fac_us = InputClock >> 1;
+ 994:	51 10       	MOV       R5, #1
+ 996:	46 dd       	LSR       R0, R6, R5
+ 998:	00 d1       	ZXT.B     R0, R0
+ 99a:	09 45       	LD        R5, [PC + #9]         ;->0x9bc  :=0x10000004
+ 99c:	50 83       	ST.B      [R5], R0
+..\system_init.c:288
+	fac_ms = fac_us * 1000;
+ 99e:	09 45       	LD        R5, [PC + #9]         ;->0x9c0  :=0x3e8
+ 9a0:	40 cb       	MULS      R0, R0, R5
+ 9a2:	00 00       	NOP      NOP      
+ 9a4:	08 45       	LD        R5, [PC + #8]         ;->0x9c4  :=0x10000006
+ 9a6:	50 84       	ST.H      [R5], R0
+..\system_init.c:289
+}
+ 9a8:	06 5d       	POP       R6
+ 9aa:	0d 5d       	POP       LR
+ 9ac:	1d 5c       	JMP       LR
+ 9ae:	00 00       	NOP      NOP      
+ 9b0:	10 06 00 00 	.long     0x00000610 ->000001552  [!!!@2@:SJMP      $-496                 ;->0x5d0	@@: NOP      
+ 9b4:	24 06 00 00 	.long     0x00000624 ->000001572  [!!!@2@:SJMP      $-476                 ;->0x5fc	@@: NOP      
+ 9b8:	ac 00 20 40 	.long     0x402000ac ->1075839148 
+ 9bc:	04 00 00 10 	.long     0x10000004 ->268435460 
+ 9c0:	e8 03 00 00 	.long     0x000003e8 ->000001000  [!!!@4@:JMP       $-1572864             ;->0xffd009c0
+ 9c4:	06 00 00 10 	.long     0x10000006 ->268435462  [!!!@2@:WAIT     	@@: MOV       R0, #0
+
+000009c8 <systick_delay_ms>:
+systick_delay_ms():
+ 9c8:	0c 45       	LD        R5, [PC + #12]        ;->0x9f8  :=0x10000006
+ 9ca:	55 81       	LD.H      R5, [R5]
+ 9cc:	40 cb       	MULS      R0, R0, R5
+ 9ce:	00 00       	NOP      NOP      
+ 9d0:	0b 42       	LD        R2, [PC + #11]        ;->0x9fc  :=0x402000a0
+ 9d2:	50 a0       	ST.W      [R2 + #1], R0
+ 9d4:	50 10       	MOV       R5, #0
+ 9d6:	95 a0       	ST.W      [R2 + #2], R5
+ 9d8:	52 82       	LD.W      R5, [R2]
+ 9da:	28 48       	SET       R5, #0
+ 9dc:	25 85       	ST.W      [R2], R5
+ 9de:	09 43       	LD        R3, [PC + #9]         ;->0xa00  :=0x10001
+ 9e0:	07 44       	LD        R4, [PC + #7]         ;->0x9fc  :=0x402000a0
+ 9e2:	52 82       	LD.W      R5, [R2]
+ 9e4:	ed d4       	ANL       R5, R5, R3
+ 9e6:	51 38       	CMP       R5, #1
+ 9e8:	fc f0       	JZ        $-4                   ;->0x9e0
+ 9ea:	54 82       	LD.W      R5, [R4]
+ 9ec:	28 4a       	CLR       R5, #0
+ 9ee:	45 85       	ST.W      [R4], R5
+ 9f0:	50 10       	MOV       R5, #0
+ 9f2:	a5 a0       	ST.W      [R4 + #2], R5
+ 9f4:	1d 5c       	JMP       LR
+ 9f6:	00 00       	NOP      NOP      
+ 9f8:	06 00 00 10 	.long     0x10000006 ->268435462  [!!!@2@:WAIT     	@@: MOV       R0, #0
+ 9fc:	a0 00 20 40 	.long     0x402000a0 ->1075839136 
+ a00:	01 00 01 00 	.long     0x00010001 ->000065537  [!!!@2@:.short    0x0001	@@: .short    0x0001
+
+00000a04 <__init_class_end>:
+ a04:	19 02       	SVC      SVC      
+ a06:	08 0d       	LD.W      R5, [SP + #8]
+ a08:	01 08       	LD.W      R0, [SP + #1]
+ a0a:	1b 02       	SVC      SVC      
+ a0c:	08 0e       	LD.W      R6, [SP + #8]
+ a0e:	01 08       	LD.W      R0, [SP + #1]
+ a10:	1d 02       	SVC      SVC      
+ a12:	08 0f       	LD.W      R7, [SP + #8]
+ a14:	01 08       	LD.W      R0, [SP + #1]
+ a16:	1f 02       	SVC      SVC      
+ a18:	08 10       	MOV       R0, #8
+ a1a:	01 08       	LD.W      R0, [SP + #1]
+ a1c:	21 02       	SVC      SVC      
+ a1e:	08 11       	MOV       R0, #24
+ a20:	01 08       	LD.W      R0, [SP + #1]
+ a22:	23 02       	SVC      SVC      
+ a24:	08 12       	MOV       R0, #40
+ a26:	01 08       	LD.W      R0, [SP + #1]
+ a28:	25 02       	SVC      SVC      
+ a2a:	08 13       	MOV       R0, #56
+ a2c:	01 08       	LD.W      R0, [SP + #1]
+ a2e:	27 02       	SVC      SVC      
+ a30:	08 14       	MOV       R0, #72
+ a32:	01 08       	LD.W      R0, [SP + #1]
+ a34:	29 02       	SVC      SVC      
+ a36:	08 15       	MOV       R0, #88
+ a38:	01 08       	LD.W      R0, [SP + #1]
+ a3a:	2b 02       	SVC      SVC      
+ a3c:	08 16       	MOV       R0, #104
+ a3e:	01 08       	LD.W      R0, [SP + #1]
+ a40:	2d 02       	SVC      SVC      
+ a42:	08 17       	MOV       R0, #120
+ a44:	01 08       	LD.W      R0, [SP + #1]
+ a46:	2f 02       	SVC      SVC      
+ a48:	08 18       	MOV       R0, #136
+ a4a:	01 08       	LD.W      R0, [SP + #1]
+ a4c:	31 02       	SVC      SVC      
+ a4e:	08 19       	MOV       R0, #152
+ a50:	01 08       	LD.W      R0, [SP + #1]
+ a52:	33 04       	SJMP      $+51                  ;->0xab8
+ a54:	04 0d       	LD.W      R5, [SP + #4]
+ a56:	01 04       	SJMP      $+1                   ;->0xa58
+ a58:	35 04       	SJMP      $+53                  ;->0xac2
+ a5a:	04 1b       	MOV       R0, #180
+ a5c:	02 04       	SJMP      $+2                   ;->0xa60
+ a5e:	37 04       	SJMP      $+55                  ;->0xacc
+ a60:	04 0e       	LD.W      R6, [SP + #4]
+ a62:	01 04       	SJMP      $+1                   ;->0xa64
+ a64:	39 04       	SJMP      $+57                  ;->0xad6
+ a66:	04 1d       	MOV       R0, #212
+ a68:	02 04       	SJMP      $+2                   ;->0xa6c
+ a6a:	3b 04       	SJMP      $+59                  ;->0xae0
+ a6c:	04 0f       	LD.W      R7, [SP + #4]
+ a6e:	01 04       	SJMP      $+1                   ;->0xa70
+ a70:	3d 04       	SJMP      $+61                  ;->0xaea
+ a72:	04 1f       	MOV       R0, #244
+ a74:	02 04       	SJMP      $+2                   ;->0xa78
+ a76:	3f 04       	SJMP      $+63                  ;->0xaf4
+ a78:	04 10       	MOV       R0, #4
+ a7a:	01 04       	SJMP      $+1                   ;->0xa7c
+ a7c:	41 04       	SJMP      $+65                  ;->0xafe
+ a7e:	04 21       	ST.W      [SP + #4], R1
+ a80:	02 04       	SJMP      $+2                   ;->0xa84
+ a82:	43 04       	SJMP      $+67                  ;->0xb08
+ a84:	04 11       	MOV       R0, #20
+ a86:	01 04       	SJMP      $+1                   ;->0xa88
+ a88:	45 04       	SJMP      $+69                  ;->0xb12
+ a8a:	04 23       	ST.W      [SP + #4], R3
+ a8c:	02 04       	SJMP      $+2                   ;->0xa90
+ a8e:	47 04       	SJMP      $+71                  ;->0xb1c
+ a90:	04 12       	MOV       R0, #36
+ a92:	01 04       	SJMP      $+1                   ;->0xa94
+ a94:	49 04       	SJMP      $+73                  ;->0xb26
+ a96:	04 25       	ST.W      [SP + #4], R5
+ a98:	02 04       	SJMP      $+2                   ;->0xa9c
+ a9a:	4b 04       	SJMP      $+75                  ;->0xb30
+ a9c:	04 13       	MOV       R0, #52
+ a9e:	01 04       	SJMP      $+1                   ;->0xaa0
+ aa0:	4d 04       	SJMP      $+77                  ;->0xb3a
+ aa2:	04 27       	ST.W      [SP + #4], R7
+ aa4:	02 04       	SJMP      $+2                   ;->0xaa8
+ aa6:	4f 04       	SJMP      $+79                  ;->0xb44
+ aa8:	04 14       	MOV       R0, #68
+ aaa:	01 04       	SJMP      $+1                   ;->0xaac
+ aac:	51 04       	SJMP      $+81                  ;->0xb4e
+ aae:	04 29       	ADD       R0, #20
+ ab0:	02 04       	SJMP      $+2                   ;->0xab4
+ ab2:	53 04       	SJMP      $+83                  ;->0xb58
+ ab4:	04 15       	MOV       R0, #84
+ ab6:	01 04       	SJMP      $+1                   ;->0xab8
+ ab8:	55 04       	SJMP      $+85                  ;->0xb62
+ aba:	04 2b       	ADD       R0, #52
+ abc:	02 04       	SJMP      $+2                   ;->0xac0
+ abe:	57 04       	SJMP      $+87                  ;->0xb6c
+ ac0:	04 16       	MOV       R0, #100
+ ac2:	01 04       	SJMP      $+1                   ;->0xac4
+ ac4:	59 04       	SJMP      $+89                  ;->0xb76
+ ac6:	04 2d       	ADD       R0, #84
+ ac8:	02 04       	SJMP      $+2                   ;->0xacc
+ aca:	5b 04       	SJMP      $+91                  ;->0xb80
+ acc:	04 17       	MOV       R0, #116
+ ace:	01 04       	SJMP      $+1                   ;->0xad0
+ ad0:	5d 04       	SJMP      $+93                  ;->0xb8a
+ ad2:	04 2f       	ADD       R0, #116
+ ad4:	02 04       	SJMP      $+2                   ;->0xad8
+ ad6:	5f 04       	SJMP      $+95                  ;->0xb94
+ ad8:	04 18       	MOV       R0, #132
+ ada:	01 04       	SJMP      $+1                   ;->0xadc
+ adc:	61 04       	SJMP      $+97                  ;->0xb9e
+ ade:	04 31       	SUB       R0, #20
+ ae0:	02 04       	SJMP      $+2                   ;->0xae4
+ ae2:	63 04       	SJMP      $+99                  ;->0xba8
+ ae4:	04 19       	MOV       R0, #148
+ ae6:	01 04       	SJMP      $+1                   ;->0xae8
+ ae8:	65 08       	LD.W      R0, [SP + #101]
+ aea:	02 33       	SUB       R0, #50
+ aec:	04 02       	SVC      SVC      
+ aee:	67 08       	LD.W      R0, [SP + #103]
+ af0:	02 0d       	LD.W      R5, [SP + #2]
+ af2:	01 02       	SVC      SVC      
+ af4:	69 08       	LD.W      R0, [SP + #105]
+ af6:	02 35       	SUB       R0, #82
+ af8:	04 02       	SVC      SVC      
+ afa:	6b 08       	LD.W      R0, [SP + #107]
+ afc:	02 1b       	MOV       R0, #178
+ afe:	02 02       	SVC      SVC      
+ b00:	6d 08       	LD.W      R0, [SP + #109]
+ b02:	02 37       	SUB       R0, #114
+ b04:	04 02       	SVC      SVC      
+ b06:	6f 08       	LD.W      R0, [SP + #111]
+ b08:	02 0e       	LD.W      R6, [SP + #2]
+ b0a:	01 02       	SVC      SVC      
+ b0c:	71 08       	LD.W      R0, [SP + #113]
+ b0e:	02 39       	CMP       R0, #18
+ b10:	04 02       	SVC      SVC      
+ b12:	73 08       	LD.W      R0, [SP + #115]
+ b14:	02 1d       	MOV       R0, #210
+ b16:	02 02       	SVC      SVC      
+ b18:	75 08       	LD.W      R0, [SP + #117]
+ b1a:	02 3b       	CMP       R0, #50
+ b1c:	04 02       	SVC      SVC      
+ b1e:	77 08       	LD.W      R0, [SP + #119]
+ b20:	02 0f       	LD.W      R7, [SP + #2]
+ b22:	01 02       	SVC      SVC      
+
+00000b24 <_Default_NULL_exception>:
+_Default_NULL_exception():
+..\_config\vector.c:441
+		V127_0x000001FC_VectorFunction
+};
+
+void __attribute__((interrupt,section(".rodata"))) _Default_NULL_exception (void);
+void __attribute__((interrupt,section(".rodata"))) _Default_NULL_exception (void)
+{
+ b24:	00 04       	SJMP      $+0                   ;->0xb24
+	...
+
+Disassembly of section .data:
+
+10000000 <__lpdata_end__>:
+10000000:	00 00       	NOP      NOP      
+	...
+
+10000004 <fac_us>:
+	...
+
+10000006 <fac_ms>:
+	...
+
+10000008 <__Heap_Start__>:
+	...
+
+10000100 <__Heap_length__>:
+	...
+
+10000108 <__Heap_End__>:
+	...
+
+1000fe00 <Stack_Mem>:
+	...
